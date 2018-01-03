@@ -3,6 +3,7 @@
   <name>wall_follower</name>
   <version>1.0.0</version>
   <description>A wall follower for the racecar.</description>
+  <maintainer email="racecar@mit.edu">racecar@mit.edu</maintainer>
 
   <license>MIT</license>
 
