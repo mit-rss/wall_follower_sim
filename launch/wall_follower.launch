@@ -1,0 +1,7 @@
+<launch>
+  <!-- Load parameters -->
+  <include file="$(find wall_follower)/launch/wall_follower_params.launch"/>
+
+  <!-- Launch the mover file -->
+  <node name="wall_follower" pkg="wall_follower" type="wall_follower.py" output="screen"/>
+</launch>

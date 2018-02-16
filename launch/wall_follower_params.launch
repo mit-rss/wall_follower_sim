@@ -1,0 +1,4 @@
+<launch>
+  <!-- Load local parameters -->
+  <rosparam command="load" file="$(find wall_follower)/params.yaml" ns="/wall_follower"/>
+</launch>
