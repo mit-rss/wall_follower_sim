@@ -64,7 +64,7 @@ You can toggle what is being displayed by checking and unchecking the boxes in t
 
 You will need ```teleop``` running before the racecar can move on it's own. Launch it with 
 
-    roslaunch racecar teleop
+    roslaunch racecar teleop.launch
 
 With ```teleop``` running you can move the car manually with a usb joystick. For autonomous driving you can publish steering commands of type [```AckermannDriveStamped```](http://docs.ros.org/jade/api/ackermann_msgs/html/msg/AckermannDriveStamped.html) to the topic:
 
