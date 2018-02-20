@@ -18,6 +18,8 @@ This lab is to be done individually. In the next lab, you will join your team to
 
 We have made a series of tests to evaluate the performance of your wall follower. In order to test your code properly you must start out with the template starter code. The template is still very sparse and you have plenty of freedom to impliment any algorithm you'd like so long as the inputs and outputs are the same.
 
+The lab is due Monday, 2/26 at noon.
+
 ## Update
 
 We made small modifications to the racecar base software in making this lab. To get the updated code, navigate to the base directory and pull.
