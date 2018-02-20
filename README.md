@@ -27,6 +27,8 @@ We made small modifications to the racecar base software in making this lab. To 
     cd [YOUR_WORKSPACE]/src/base
     git pull
     
+Make sure you are on the "vm" branch in base by running ```git checkout vm``` in ```[YOUR_WORKSPACE]/src/base```.
+    
 ## Download this Repository
 
 Make sure you are in the ```[YOUR_WORKSPACE]/src``` directory. Then download this repository by clicking the "Download" link at the top of this page and unzipping the file. Set it up as your own git repository so you can push changes.
