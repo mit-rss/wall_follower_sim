@@ -3,7 +3,7 @@
 ## TL;DR
 
 - ```cd [YOUR_WORKSPACE]/src/base; git pull```
-- ```cd [YOUR_WORKSPACE]/src; git clone [THIS_REPO]```
+- ```cd [YOUR_WORKSPACE]/src```, download this repository and set up your own git repo for it.
 - Complete ```src/wall_follower.py```.
 - ```roscore```
 - ```rviz```
