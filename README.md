@@ -7,7 +7,7 @@
 - Complete ```src/wall_follower.py```.
 - ```roscore```
 - ```rviz```
-- ```./run_tests```
+- ```./run_tests2```
 - Upload ```log.npz``` to gradescope.
 
 ## Introduction
@@ -62,7 +62,7 @@ With ```teleop``` running you can move the car manually with a usb joystick. For
 
     '/vesc/ackermann_cmd_mux/input/navigation'
     
-Import the ```AckermannDriveStamped``` like this in python:
+Import the ```AckermannDriveStamped``` type like this in python:
 
     from ackermann_msgs.msg import AckermannDriveStamped
     
@@ -70,7 +70,7 @@ Import the ```AckermannDriveStamped``` like this in python:
 
 The racecar (and it’s simulation) are equipped a with LIDAR sensor that measures the distance from the racecar to its surroundings with high accuracy. All of the LIDAR data is published to the ```'/scan'``` topic.
 
-The data is of type [```LaserScan```](http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html). You can import that type in python it using:
+The data is of type [```LaserScan```](http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html). You can import the type in python using:
 
     from sensor_msgs.msg import LaserScan
 
@@ -123,11 +123,15 @@ Then start ```roscore```.
 In another terminal run ```rviz``` if you wish to the see the racecar executing the tests.
 Finally, run the following in a new terminal to begin testing:
 
-    ./run_tests.py
+    ./run_tests2
     
+We have compiled 2 versions of the test binary (```run_tests``` and ```run_tests2```) for 2 different OS configurations.
+The tests themselves are exactly the same.
+```run_tests2``` should work on the VM and similar systems. If neither work please talk to the TAs.
+
 Click on the video below to see a full run of the tests. 
 Note that ```roscore``` and ```rviz``` are already running in the two stacked windows on the left.
-In our implimentation we draw a red line in ```rviz``` using the [```Marker```](http://wiki.ros.org/rviz/DisplayTypes/Marker) class to visualize the wall that we have detected. You will be required to make useful visualizations like these in future labs.
+In our implimentation we draw a red line in ```rviz``` using the [```Marker```](http://wiki.ros.org/rviz/DisplayTypes/Marker) class to visualize the wall that we have detected. You will be required to make useful visualizations like these in future labs. If you are having issues debugging your system it can be much easier to recognize the problem if you can visualize the output, so feel free to try to do so in this lab and ask the TAs if you need help.
 
 [![Test Demo](https://img.youtube.com/vi/MkG3eMXFFsM/0.jpg)](https://youtu.be/MkG3eMXFFsM)
 
