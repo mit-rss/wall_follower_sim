@@ -1,14 +1,6 @@
 # Lab 2: Wall Follower
 
-## TL;DR
-
-- ```cd [YOUR_WORKSPACE]/src/base; git pull```
-- ```cd [YOUR_WORKSPACE]/src```, download this repository and set up your own git repo for it.
-- Complete ```src/wall_follower.py```.
-- ```roscore```
-- ```rviz```
-- ```./run_tests2```
-- Upload ```log.npz``` to gradescope.
+Several common bugs have been resolved in this post: [this piazza post](https://piazza.com/class/jdalf8rbr1o7jd?cid=142).
 
 ## Introduction
 
@@ -40,7 +32,7 @@ Your directory structure should now look like
   - ```base/```
   - ```lab2_wall_follower_sim/```
 
-Then build this repository by running ```catkin_make``` in ```[YOUR_WORKSPACE]```.
+Then rebuild your workspace by running ```catkin_make``` in ```[YOUR_WORKSPACE]```.
 
 ## Simulator
 
@@ -52,11 +44,11 @@ Then begin the actual simulation:
 
     roslaunch headless_simulator simulate.launch 
     
-If you get a ```KeyError``` when you try to run ```simulate.launch```, please run ```teleop.launch``` first:
+If you get a ```KeyError``` when you try to run ```simulate.launch```, try to run ```teleop.launch``` first:
 
     roslaunch racecar teleop.launch
     
-See the navigation section for more on ```teleop```.
+See the **Navigation** section for more on ```teleop```.
     
 ## RVIZ
 
