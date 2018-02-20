@@ -2,6 +2,7 @@
 
 ## TL;DR
 
+- ```cd [YOUR_WORKSPACE]/src/base; git pull```
 - Download this repo.
 - Complete ```src/wall_follower.py```.
 - ```roscore```
@@ -16,6 +17,13 @@ In this lab, you will be implementing a wall follower on a simulated version of 
 This lab is to be done individually. In the next lab, you will join your team to get your wall follower working on the real racecar.
 
 We have made a series of tests to evaluate the performance of your wall follower. In order to test your code properly you must start out with the template starter code. The template is still very sparse and you have plenty of freedom to impliment any algorithm you'd like so long as the inputs and outputs are the same.
+
+## Update
+
+We made small modifications to the racecar base software in making this lab. To get the updated code, navigate to the base directory and pull.
+    
+    cd [YOUR_WORKSPACE]/src/base
+    git pull
 
 ## Simulator
 
