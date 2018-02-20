@@ -19,14 +19,7 @@ We have made a series of tests to evaluate the performance of your wall follower
 
 ## Simulator
 
-To install the simulator, clone it from github and rebuild your workspace:
-
-    cd YOUR_RACECAR_WORKSPACE/src
-    git clone https://github.mit.edu/chwalsh/headless_racecar_sim
-    cd YOUR_RACECAR_WORKSPACE
-    catkin_make
-
-To run it, first launch the map server:
+The simulator comes preinstalled with the racecar software. To run it, first launch the map server:
 
     roslaunch headless_simulator map_server.launch
 
@@ -37,9 +30,10 @@ Then begin the actual simulation:
 ## RVIZ
 
 To see the simulated car, you will need to open [```rviz```](http://wiki.ros.org/rviz). 
-To open ```rviz``` with the settings included in the simulator repo, run:
+You can download the default settings for running the simulator in rviz [here](https://github.mit.edu/2018-RSS/racecar_base_ros_install/blob/vm/headless_racecar_sim/base.rviz). To download, hit "Raw" and then save the file as "base.rviz".
 
-    cd YOUR_RACECAR_WORKSPACE/src/headless_racecar_sim/
+To open ```rviz``` with these settings, run:
+
     rviz base.rviz
     
 These settings add place, drag and rotate tools so that you can manipulate the simulated car. If you save these settings to ```/home/YOUR_USERNAME/.rviz/default.rviz```, then you will have access to the tools simply by running ```rviz```. If all is working you should be able to see and manipulate the car like in the demo below (click to watch):
