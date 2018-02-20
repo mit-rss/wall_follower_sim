@@ -33,6 +33,13 @@ Make sure you are on the "vm" branch in base by running ```git checkout vm``` in
 
 Make sure you are in the ```[YOUR_WORKSPACE]/src``` directory. Then download this repository by clicking the "Download" link at the top of this page and unzipping the file. Set it up as your own git repository so you can push changes.
 
+Your directory structure should now look like
+
+- ```[YOUR_WORKSPACE]/src/```
+  - ```CMakeLists.txt```
+  - ```base/```
+  - ```lab2_wall_follower_sim/```
+
 Then build this repository by running ```catkin_make``` in ```[YOUR_WORKSPACE]```.
 
 ## Simulator
@@ -44,6 +51,12 @@ The simulator comes preinstalled with the racecar software. To run it, first lau
 Then begin the actual simulation:
 
     roslaunch headless_simulator simulate.launch 
+    
+If you get a ```KeyError``` when you try to run ```simulate.launch```, please run ```teleop.launch``` first:
+
+    roslaunch racecar teleop.launch
+    
+See the navigation section for more on ```teleop```.
     
 ## RVIZ
 
