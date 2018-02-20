@@ -1,6 +1,6 @@
 # Lab 2: Wall Follower
 
-Several common bugs have been resolved in this post: [this piazza post](https://piazza.com/class/jdalf8rbr1o7jd?cid=142).
+Several common bugs have been resolved in [this piazza post](https://piazza.com/class/jdalf8rbr1o7jd?cid=142).
 
 ## Introduction
 
