@@ -3,7 +3,7 @@
 ## TL;DR
 
 - ```cd [YOUR_WORKSPACE]/src/base; git pull```
-- Download this repo.
+- ```cd [YOUR_WORKSPACE]/src; git clone [THIS_REPO]```
 - Complete ```src/wall_follower.py```.
 - ```roscore```
 - ```rviz```
@@ -26,6 +26,12 @@ We made small modifications to the racecar base software in making this lab. To 
     
     cd [YOUR_WORKSPACE]/src/base
     git pull
+    
+## Download this Repository
+
+Make sure you are in the ```[YOUR_WORKSPACE]/src``` directory. Then download this repository by clicking the "Download" link at the top of this page and unzipping the file. Set it up as your own git repository so you can push changes.
+
+Then build this repository by running ```catkin_make``` in ```[YOUR_WORKSPACE]```.
 
 ## Simulator
 
