@@ -14,7 +14,7 @@ The lab is due Monday, 2/26 at noon.
 
 ## Update
 
-We made small modifications to the racecar base software in making this lab. To get the updated code, navigate to the base directory and pull.
+We made small modifications to the racecar base software in making this lab. To get the updated code, navigate to the base directory and pull. Note that if you are using the VM, [YOUR_WORKSPACE] refers to ```~/racecar_ws/```, not the workspace you created in lab1c.
     
     cd [YOUR_WORKSPACE]/src/base
     git pull
