@@ -2,11 +2,11 @@
 
 ## Introduction
 
-In this lab, you will be implementing a wall follower on a simulated version of the racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maining a constant distance from a wall on either its left or right (chosen on the fly). It should also be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from small deviations from the desired state; being too far, too close, or too angled.
+In this lab, you will be implementing a wall follower on a simulated version of the racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maintaining a constant distance from a wall on either its left or right (chosen on the fly). It should also be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from small deviations from the desired state; being too far, too close, or too angled.
 
 This lab is to be done individually. In the next lab, you will join your team to get your wall follower working on the real racecar.
 
-We have made a series of tests to evaluate the performance of your wall follower. In order to test your code properly you must start out with the template starter code. The template is still very sparse and you have plenty of freedom to impliment any algorithm you'd like so long as the inputs and outputs are the same.
+We have made a series of tests to evaluate the performance of your wall follower. In order to test your code properly you must start out with the template starter code. The template is still very sparse and you have plenty of freedom to implement any algorithm you'd like so long as the inputs and outputs are the same.
     
 ## Download this Repository
 
@@ -106,7 +106,9 @@ To run the wall follower launch:
 The test suite we have made runs on entirely on it's own and puts your racecar through some basic wall following challenges.
 Our test will override the values for ```desired_distance```, ```velocity```, and ```side``` that are set in the ```params.yaml``` file in order to make sure they are being used correctly.
 
-You can download the test binary by going to the [releases page of this repo](https://github.com/mit-rss/wall_follower_sim/releases) and downloading the ```run_tests``` binary.
+You can download the test binary by going to the [releases page of this repo](https://github.com/mit-rss/wall_follower_sim/releases) and downloading the ```run_tests``` binary. Make the binary executable with ```chmod```:
+
+    chmod +x run_tests
 
 First, kill all running ROS processes.
 Then start ```roscore```. 
