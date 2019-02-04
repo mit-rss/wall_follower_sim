@@ -1,4 +1,4 @@
-# Lab 2: Wall Follower
+# Wall Following in Simulation
 
 ## Introduction
 
