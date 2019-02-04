@@ -1,7 +1,5 @@
 # Lab 2: Wall Follower
 
-Several common bugs have been resolved in [this piazza post](https://piazza.com/class/jdalf8rbr1o7jd?cid=142).
-
 ## Introduction
 
 In this lab, you will be implementing a wall follower on a simulated version of the racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maining a constant distance from a wall on either its left or right (chosen on the fly). It should also be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from small deviations from the desired state; being too far, too close, or too angled.
@@ -39,7 +37,7 @@ To see the simulated car, you will need to open [```rviz```](http://wiki.ros.org
 
     rviz
 
-In the left panel on the bottom click the "Add" button, and then in the "By display type" tab click "RobotModel". You should see a small blue car appear. Then click "Add" again and in the "By topic" tab click add the "/map" topic and then repeat to add the laser scan topic. Under added LaserScan dropdown menu there should be a field called "Size (m)". Change this to 0.1 so you can see the laser scan more clearly.
+In the left panel on the bottom click the "Add" button, and then in the "By display type" tab click "RobotModel". You should see a small blue car appear. Then click "Add" again and in the "By topic" tab click add the "/map" topic and then repeat to add the laser scan topic. Under added LaserScan dropdown menu there should be a field called "Size (m)". Change this to 0.1 so you can see the laser scan more clearly. The checkboxes turn on and off display types which may be useful as you add topics to visualize.
 
 ![Add button](https://i.imgur.com/85tY4tZ.png)
 
@@ -140,7 +138,7 @@ If your code is truly following a wall than it should minimize the average absol
 
 To turn this value into a score between 0 and 1 we compute:
 
-![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1 + (\alpha\cdot{loss})^2})
+![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1+(\alpha\cdot{loss})^2})
 
 Don't worry, it is impossible to get exactly 100%.
 In some test cases we start the racecar closer or farther to the wall than the desired distance, which will automatically lower the max score.
