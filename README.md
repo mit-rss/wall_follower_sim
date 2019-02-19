@@ -7,6 +7,10 @@ In this lab, you will be implementing a wall follower on a simulated version of 
 This lab is to be done individually. In the next lab, you will join your team to get your wall follower working on the real racecar.
 
 We have made a series of tests to evaluate the performance of your wall follower. In order to test your code properly you must start out with the template starter code. The template is still very sparse and you have plenty of freedom to implement any algorithm you'd like so long as the inputs and outputs are the same.
+
+## Submission
+
+After running the automated tests described at the [end of this lab](https://github.com/mit-rss/wall_follower_sim#running-the-tests), you will generate a file called ```log.npz```. **You must upload this to gradescope for credit**. Please check gradescope for the submission deadline.
     
 ## Download this Repository
 
