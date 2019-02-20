@@ -153,7 +153,10 @@ Don't worry, it is impossible to get exactly 100%.
 In some test cases we start the racecar closer or farther to the wall than the desired distance, which will automatically lower the max score.
 The racecar also has to navigate around tight turns which it can't do perfectly with a limited turning radius.
 Moreover there are many ways to measure the distance to a wall so our metric might not match yours exactly.
-We have chosen ![alpha](https://latex.codecogs.com/gif.latex?\alpha) so your score will be in the 90's if it is on par with the TA solution.
-Your score for the ```short_left_far_angled``` test will be lower than the others because the racecar starts far from the desired distance.
+We have chosen ![alpha](https://latex.codecogs.com/gif.latex?\alpha) so your score will be in the high 90's for most of the tests. 
+Your score for the ```short_left_far_angled``` test will be lower than the others because the racecar starts far from the desired distance. Example TA grades below:
+
+![TA grades](https://c2.staticflickr.com/8/7882/33284090908_e04084e7d6_o.png)
 
 **Tampering with the autograder or the submission file and hardcoding solutions to the test cases will be considered cheating. Don't do it.**
+
