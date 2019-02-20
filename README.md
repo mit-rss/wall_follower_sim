@@ -30,7 +30,7 @@ Your directory structure should now look like
 
 Then rebuild your workspace with ``catkin_make```:
 
-    cd ~/racecar_ws/src
+    cd ~/racecar_ws
     catkin_make
 
 ## Simulator
