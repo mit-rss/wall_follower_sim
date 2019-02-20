@@ -59,7 +59,7 @@ Note that the simulator does not include collision detection, but we will check 
 
 In order to make the car drive autonomously you will need to publish messages of type [```AckermannDriveStamped```](http://docs.ros.org/jade/api/ackermann_msgs/html/msg/AckermannDriveStamped.html) to the ```/drive``` topic.
     
-Import the ```AckermannDriveStamped``` type like this in python:
+Import the ```AckermannDriveStamped``` type like this in your wall_follower.py file:
 
     from ackermann_msgs.msg import AckermannDriveStamped
     
