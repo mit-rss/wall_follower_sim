@@ -10,8 +10,10 @@ We have made a series of tests to evaluate the performance of your wall follower
 
 ## Submission
 
-After running the automated tests described at the [end of this lab](https://github.com/mit-rss/wall_follower_sim#running-the-tests), you will generate a file called ```log.npz```. **You must upload this to gradescope for credit**. Please check gradescope for the submission deadline.
-    
+After running the automated tests described at the [end of this lab](https://github.com/mit-rss/wall_follower_sim#running-the-tests), you will generate a file called ```log.npz```. **You must upload this to gradescope for credit**. 
+
+The lab is due 1 week from the release date on **February 27, 2019**.
+
 ## Download this Repository
 
 Clone this repository into your catkin workspace:
@@ -51,6 +53,7 @@ You should see a car in a map (walls are black, empty space is grey) and points 
 
 You can move the car around by plugging in a joystick into your computer, or by clicking the "2D Pose Estimate" button on top of rviz and dragging somewhere on the map.
 
+Note that the simulator does not include collision detection, but we will check that your car has not crashed.
 
 ## Autonomous driving
 
