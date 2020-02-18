@@ -1,3 +1,7 @@
+| Due Date   | Wednesday, February 26       |
+|------------|------------------------------|
+| Submission | `log.npz` file on Gradescope |
+
 # Wall Following in Simulation
 
 ## Introduction
