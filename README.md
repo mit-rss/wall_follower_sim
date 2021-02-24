@@ -1,7 +1,3 @@
-| Due Date   | Wednesday, February 26       |
-|------------|------------------------------|
-| Submission | `log.npz` file on Gradescope |
-
 | **Due Date**  | **Wednesday, March 10th at 1:00PM EST**                                 |
 |---------------|----------------------------------------------------------------------------|
 |  **Submission**   | `log.npz`on [Gradescope](https://gradescope.com/) |
