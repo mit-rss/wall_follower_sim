@@ -38,7 +38,7 @@ Then rebuild your workspace with `catkin_make`:
     catkin_make
     source devel/setup.bash
 
-## Simulator
+##  Simulator (Skip if you're using the Docker image; the simulator is already installed!)
 
 First, launch the simulator by running:
 
@@ -121,7 +121,7 @@ Our test will override the values for `desired_distance`, `velocity`, and `side`
 
 ### Setup
 
-You can download the test binary by going to the [releases page of this repo](https://github.com/mit-rss/wall_follower_sim/releases) and downloading the `run_tests` binary. Make the binary executable with `chmod`:
+You can download the test binary by going to the [releases page of this repo](https://github.com/mit-rss/wall_follower_sim/releases) and downloading the `run_tests` binary (testsv2). Make the binary executable with `chmod`:
 
     chmod +x run_tests
 
