@@ -25,30 +25,23 @@ Clone this repository into your catkin workspace:
     cd ~/racecar_ws/src
     git clone https://github.com/mit-rss/wall_follower_sim.git
 
-Your directory structure should now look like
-
-- `[YOUR_WORKSPACE]/src/`
-  - `CMakeLists.txt`
-  - `racecar_simulator/`
-  - `wall_follower_sim/`
-
 Then rebuild your workspace with `catkin_make`:
 
     cd ~/racecar_ws
     catkin_make
     source devel/setup.bash
 
-##  Simulator (Skip if you're using the Docker image; the simulator is already installed!)
+##  Simulator
 
-First, launch the simulator by running:
+First, launch the [racecar simulator](https://github.com/mit-racecar/racecar_simulator) by running:
 
     roslaunch racecar_simulator simulate.launch
     
-To see the simulated car, you will need to open [`rviz`](http://wiki.ros.org/rviz) by typing
+To see the simulated car, you will need to open [`rviz`](http://wiki.ros.org/rviz) by running:
 
     rviz
 
-In the left panel on the bottom click the "Add" button, and then in the "By display type" tab click "RobotModel". You should see a small blue car appear. Then click "Add" again and in the "By topic" tab click add the "/map" topic and repeat to add the laser scan topic. Under added LaserScan dropdown menu there should be a field called "Size (m)". Change this to 0.1 so you can see the laser scan more clearly. The checkboxes turn on and off display types, which may be useful as you add topics to visualize.
+If you're using the [racecar docker image](https://github.com/mit-racecar/racecar_docker), Rviz will already be configured to visualize the simulator. But if not, in the left panel on the bottom click the "Add" button, and then in the "By display type" tab click "RobotModel". You should see a small blue car appear. Then click "Add" again and in the "By topic" tab click add the "/map" topic and repeat to add the laser scan topic. Under added LaserScan dropdown menu there should be a field called "Size (m)". Change this to 0.1 so you can see the laser scan more clearly. The checkboxes turn on and off display types, which may be useful as you add topics to visualize.
 
 ![Add button](https://i.imgur.com/85tY4tZ.png)
 
@@ -81,6 +74,16 @@ The `ranges` data entry in the `LaserScan` message  is an array of the distances
 The rainbow points in this image below are the laser scan as visualized in ```rviz```. The color simply corresponds to the intensity of the scan. In the simulator this is simply the distance, but on the actual lidar it gives you an indication of how reflective the object you are scanning is. Note that there is no data in the quadrant behind the car because the LIDAR sensor does not scan the full 360 degree range.
 
 ![The racecar in a cubicle](https://raw.githubusercontent.com/mit-racecar/racecar_simulator/master/media/racecar_simulator_rviz_2.png)
+
+## Simulator Parameters
+
+The simulator uses a number of parameters that might be useful for your wall follower including:
+
+- `max_speed`: 4 meters/second
+- `max_steering_angle`: 0.34 radians
+
+A complete list can be found in the simulator's [params.yaml](https://github.com/mit-racecar/racecar_simulator/blob/master/params.yaml).
+Don't change these parameters, they will be automatically reset to defaults when you run the automated test suite anyways.
 
 ## Steps to Success
 How you implement the wall follower is entirely up to you. However implementing the following may get you started in the right direction:
