@@ -161,13 +161,15 @@ In our implimentation we draw a red line in `rviz` using the [`Marker`](http://w
 In each test case we compute distances from the racecar to the wall on the appropriate side at regular time intervals.
 If your code is truly following a wall than it should minimize the average absolute difference between the distance to the wall and the desired distance to the wall.
 
-![Eqn1](https://latex.codecogs.com/gif.latex?loss=\frac{1}{N}\sum_{i=0}^N|distance[i]-desired\\_distance|)
+<!-- ![Eqn1](https://latex.codecogs.com/gif.latex?loss=\frac{1}{N}\sum_{i=0}^N|distance[i]-desired\\_distance|) -->
 
-<img src="https://render.githubusercontent.com/render/math?math=loss=\frac{1}{N}\sum_{i=0}^N|distance[i]-desired\_distance|">
+![Eqn1](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_loss.png)
+    
 
 To turn this value into a score between 0 and 1 we compute:
 
-![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1+(\alpha\cdot{loss})^2})
+<!-- ![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1+(\alpha\cdot{loss})^2}) -->
+![Eqn2](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_score.png)
 
 Don't worry, it is impossible to get exactly 100%.
 In some test cases we start the racecar closer or farther to the wall than the desired distance, which will automatically lower the max score.
