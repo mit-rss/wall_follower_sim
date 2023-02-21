@@ -1,4 +1,4 @@
-| **Due Date**  | **Wednesday, February 23rd at 1:00PM EST**                                 |
+| **Due Date**  | **Monday, February 27th at 1:00PM EST**                                 |
 |---------------|----------------------------------------------------------------------------|
 |  **Submission**   | `log.npz`on [Gradescope](https://gradescope.com/) |
 
