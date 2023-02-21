@@ -16,7 +16,7 @@ We have made a series of tests to evaluate the performance of your wall follower
 
 After running the automated tests described at the [end of this lab](https://github.com/mit-rss/wall_follower_sim#running-the-tests), you will generate a file called ```log.npz```. **You must upload this to Gradescope for credit**. 
 
-The lab is due on **February 23rd, 2022**, 9 days from the release date.
+The lab is due on **February 27rd, 2023**, 6 days from the release date.
 
 ## Download this Repository
 
