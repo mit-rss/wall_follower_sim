@@ -115,7 +115,7 @@ To launch the wall follower, run:
 
     ros2 launch wall_follower wall_follower.launch.xml
 
-## Running the Tests
+## Running the Tests (Needs to be updated)
 
 The test suite runs on entirely on its own and puts your racecar through some basic wall following challenges.
 Our test will override the values for `desired_distance`, `velocity`, and `side` that are set in the `params.yaml` file in order to make sure they are being used correctly.
