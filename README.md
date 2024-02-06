@@ -28,7 +28,7 @@ Clone this repository into your catkin workspace:
 Then rebuild your workspace with `catkin_make`:
 
     cd ~/racecar_ws
-    colcon build
+    colcon build --symlink-install
     source install/setup.bash
 
 ##  Simulator
