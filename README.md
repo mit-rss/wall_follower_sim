@@ -1,4 +1,4 @@
-| **Due Date**  | **TBD at 1:00PM EST**                                     |
+| **Due Date**  | **Wednesday, Feb 28th at 1:00PM EST**                                     |
 |---------------|----------------------------------------------------------------------------|
 |  **Submission**   | `log.npz`on [Gradescope](https://gradescope.com/) |
 
@@ -16,7 +16,7 @@ We have made a series of tests to evaluate the performance of your wall follower
 
 After running the automated tests described at the [end of this lab](https://github.com/mit-rss/wall_follower_sim#running-the-tests), you will generate a file called ```log.npz```. **You must upload this to Gradescope for credit**. 
 
-The lab is due on **TBD, 2024**, TBD days from the release date.
+The lab is due on **Wednesday, Feb 28th, 2024**, 8 days from the release date.
 
 ## Download this Repository
 
