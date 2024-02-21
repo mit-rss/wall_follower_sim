@@ -9,13 +9,15 @@ from visualization_tools import VisualizationTools  # Assuming VisualizationTool
 
 class LinePublisher(Node):
 
-    self.declare_parameter('wall_follower/scan_topic', '/scan')
-    # the topics to publish and subscribe to
-    SCAN_TOPIC = self.get_parameter('wall_follower/scan_topic').get_parameter_value().string_value
+        
+        # the topics to publish and subscribe to
     WALL_TOPIC = "/wall"
 
     def __init__(self):
         super().__init__('line_publisher')
+
+        self.declare_parameter('wall_follower/scan_topic', '/scan')
+        self.SCAN_TOPIC = self.get_parameter('wall_follower/scan_topic').get_parameter_value().string_value
 
         # a publisher for our line marker
         self.line_pub = self.create_publisher(Marker, self.WALL_TOPIC, 1)
