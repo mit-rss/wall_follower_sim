@@ -47,7 +47,10 @@ You should see a car in a map (walls are black, empty space is grey) and points 
 
 ![The racecar in the starting position](https://raw.githubusercontent.com/mit-racecar/racecar_simulator/master/media/racecar_simulator_rviz_1.png)
 
-You can move the car around by plugging in a joystick into your computer, or by clicking the "2D Pose Estimate" button on top of rviz and dragging somewhere on the map.
+You can change the position of the robot by clicking the "2D Pose Estimate" button on top of rviz and placing the somewhere on the map.
+
+*Future note: You can also move the car around by plugging in a joystick into your computer*
+
 
 **Note that the simulator does not include collision detection, but we will check that your car has not crashed.**
 
