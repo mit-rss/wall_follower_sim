@@ -115,68 +115,7 @@ To launch the wall follower, run:
 
     ros2 launch wall_follower wall_follower.launch.xml
 
-## Running the Tests (Needs to be updated)
+## Running the Tests
 
-The test suite runs on entirely on its own and puts your racecar through some basic wall following challenges.
-Our test will override the values for `desired_distance`, `velocity`, and `side` that are set in the `params.yaml` file in order to make sure they are being used correctly.
-
-### Setup
-
-You can download the test binary by going to the [releases page of this repo](https://github.com/mit-rss/wall_follower_sim/releases) and downloading the `run_tests` binary (testsv2). Make the binary executable with `chmod`:
-
-    chmod +x run_tests
-
-### Executing the test suite
-1. Kill all running ROS processes.
-2. Start `roscore`.
-3. If you wish to the see the racecar executing the tests, you can also start `rviz`.
-4. Run the following in a new terminal to begin testing:
-
-       ./run_tests
-
-**Notes:**
-
-* As the racecar completes each challege, `run_tests` will write to a file named `log.npz`. Upload this file to Gradescope, where it will be automatically graded.
-* If you kill the test script before you complete all of the challenges, the ones that have completed so far can still be graded.
-* If your racecar takes too long (i.e. it gets lost or crashes), the challenge will eventually time out and move to the next one.
-* You can also run individual tests by running:
-
-      ./run_tests [Test Number]
-
-  To have a particular test case scored, your racecar must successfully drive from the start point where we automatically place it, to a specified end area (see video below for example).
-
-### Expected results
-
-Click on the video below to see a full run of the tests. 
-
-Note that `roscore` and `rviz` are already running in the two stacked windows on the left.
-In our implimentation we draw a red line in `rviz` using the [`Marker`](http://wiki.ros.org/rviz/DisplayTypes/Marker) message to visualize the wall that we have detected. You will be required to make useful visualizations like these in future labs. If you are having issues debugging your system it can be much easier to recognize the problem if you can visualize the output, so feel free to try to do so in this lab and ask the TAs if you need help.
-
-[![Test Demo](https://img.youtube.com/vi/MkG3eMXFFsM/0.jpg)](https://youtu.be/MkG3eMXFFsM)
-
-#### Scoring
-
-In each test case we compute distances from the racecar to the wall on the appropriate side at regular time intervals.
-If your code is truly following a wall than it should minimize the average absolute difference between the distance to the wall and the desired distance to the wall.
-
-<!-- ![Eqn1](https://latex.codecogs.com/gif.latex?loss=\frac{1}{N}\sum_{i=0}^N|distance[i]-desired\\_distance|) -->
-
-![Eqn1](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_loss.png)
-    
-
-To turn this value into a score between 0 and 1 we compute:
-
-<!-- ![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1+(\alpha\cdot{loss})^2}) -->
-![Eqn2](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_score.png)
-
-Don't worry, it is impossible to get exactly 100%.
-In some test cases we start the racecar closer or farther to the wall than the desired distance, which will automatically lower the max score.
-The racecar also has to navigate around tight turns which it can't do perfectly with a limited turning radius.
-Moreover there are many ways to measure the distance to a wall so our metric might not match yours exactly.
-We have chosen ![alpha](https://latex.codecogs.com/gif.latex?\alpha), so your score will be in the high 90's for most of the tests. 
-Your score for the `short_left_far_angled` test will be lower than the others because the racecar starts far from the desired distance. Example TA grades below:
-
-![TA grades](https://c2.staticflickr.com/8/7882/33284090908_e04084e7d6_o.png)
-
-**Tampering with the autograder or the submission file and hardcoding solutions to the test cases will be considered cheating. Don't do it.**
+Information on the autograder will be released by this weekend.  However, it should be much easier to self-check how your wall-follower is performing by watching it in Rviz!
 
