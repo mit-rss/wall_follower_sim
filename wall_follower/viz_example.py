@@ -5,7 +5,7 @@ import numpy as np
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker
-from visualization_tools import VisualizationTools  # Assuming VisualizationTools is a class in visualization_tools module
+from wall_follower.visualization_tools import VisualizationTools  # Assuming VisualizationTools is a class in visualization_tools module
 
 class LinePublisher(Node):
 
@@ -30,7 +30,6 @@ class LinePublisher(Node):
         # here we are just plotting a parabola as a demo
         x = np.linspace(-2., 2., num=20)
         y = np.square(x)
-
         VisualizationTools.plot_line(x, y, self.line_pub, frame="/laser")
 
 
