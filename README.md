@@ -120,5 +120,32 @@ To launch the wall follower, run:
 
 ## Running the Tests
 
-Information on the autograder will be released by this weekend.  However, it should be much easier to self-check how your wall-follower is performing by watching it in Rviz!
+The git has been updated with the autograder tests. Like last lab you will be asked to run your tests locally and then submit the log.npz files that the tests generate. We have added two launch files to launch the correct simulator and tests (note: to add these files to your ros workspace see the changes to setup.py). 
+
+To launch the new simulator, run:
+
+    ros2 launch wall_follower launch_test_sim.launch.py
+
+The tester code is  in `/wall_follower_sim/wall_follower/test_wall_follower.py` 
+
+To launch the tests, run:
+
+    ros2 launch wall_follower launch_test.launch.py
+
+### NOTE: 
+There is one encrypted file that will depend on your computer architecture. This file is in 
+
+`wall_follower_sim/wall_follower/encrypt_arm64/np_encrypt` 
+
+or
+
+`wall_follower_sim/wall_follower/encrypt_amd64/np_encrypt`. 
+
+Take the file that matches your computer and move it to the `/wall_follower_sim/wall_follower/` folder for a final path of `wall_follower_sim/wall_follower/np_encrypt`. 
+
+## Submission
+
+There will be 6 log files created for 6 tests. These logs files will appear in your Ros2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all your test files to the gradescope assignment. 
+
+
 
