@@ -6,7 +6,7 @@ from sensor_msgs.msg import LaserScan
 from ackermann_msgs.msg import AckermannDriveStamped
 from visualization_msgs.msg import Marker
 
-from wall_follower.visualization_tools import *
+from wall_follower.visualization_tools import VisualizationTools
 
 
 class WallFollower(Node):
