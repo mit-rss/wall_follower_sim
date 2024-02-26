@@ -132,16 +132,10 @@ To launch the tests, run:
 
     ros2 launch wall_follower launch_test.launch.py
 
-### NOTE: 
-There is one encrypted file that will depend on your computer architecture. This file is in 
+#### NOTE: 
+There encrypted file is not being recognised by ros2. Just download the file: (your chip type does not matter)
 
-`wall_follower_sim/wall_follower/encrypt_arm64/np_encrypt` 
-
-or
-
-`wall_follower_sim/wall_follower/encrypt_amd64/np_encrypt`. 
-
-Take the file that matches your computer and move it to the `/wall_follower_sim/wall_follower/` folder for a final path of `wall_follower_sim/wall_follower/np_encrypt`. 
+`wall_follower_sim/wall_follower/np_encrypt.py` 
 
 ## Submission
 
