@@ -134,7 +134,7 @@ To launch the tests, run:
     ros2 launch wall_follower launch_test.launch.py
 
 
-##Important in your wall_follower.py you need to add these 3 lines to your laser_callback function. This will allow the tests to update the desired side, distance, and velocity. These params should also not be manually overridden. 
+## Important in your wall_follower.py you need to add these 3 lines to your laser_callback function. This will allow the tests to update the desired side, distance, and velocity. These params should also not be manually overridden. 
 
     self.SIDE = self.get_parameter('side').get_parameter_value().integer_value
     self.VELOCITY = self.get_parameter('velocity').get_parameter_value().double_value
