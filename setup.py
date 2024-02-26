@@ -13,7 +13,9 @@ setup(
         ('share/'+package_name, ['package.xml', "wall_follower/params.yaml"]),
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
-        ('share/wall_follower/launch', glob.glob(os.path.join('launch', '*launch.xml')))],
+        ('share/wall_follower/launch', glob.glob(os.path.join('launch', '*launch.xml'))),
+        ('share/wall_follower/launch', glob.glob(os.path.join('launch', '*launch.py')))],
+
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Sebastian',
@@ -24,7 +26,8 @@ setup(
     entry_points={
         'console_scripts': [
             'wall_follower = wall_follower.wall_follower:main',
-	    'viz_example = wall_follower.viz_example:main',
+	        'viz_example = wall_follower.viz_example:main',
+        	'test_wall_follower = wall_follower.test_wall_follower:main',
         ],
     },
 )
