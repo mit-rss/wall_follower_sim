@@ -148,7 +148,8 @@ There encrypted file is not being recognised by ros2. Just download the file: (y
 
 ## Submission
 
-There will be 6 log files created for 6 tests. These logs files will appear in your Ros2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all your test files to the gradescope assignment. 
+There will be 6 log files created for 6 tests. These logs files will appear in your Ros2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all your test files to the [gradescope assignment](https://www.gradescope.com/courses/728544). 
 
+(if you have not generated all the files because you have not passed all the tests you can still get partial points from submitting whatever files you do have)
 
 
