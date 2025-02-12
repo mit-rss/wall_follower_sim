@@ -22,6 +22,8 @@
 
 In this lab, you will be implementing a wall follower on a simulated racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maintaining a constant distance from a wall on either its left or right (chosen on the fly). It should be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from deviations from the desired state; being too far, too close, or too angled.
 
+<img src="wall_follower.gif" alt="Thumbnail GIF" width="300">
+
 This lab should be done individually. In the next lab, you will join your team to get your wall follower working on the real racecar. You may reuse code you write for this lab so make sure it is clean and presentable to your teammates!
 
 We have made a series of tests to evaluate the performance of your wall follower. In order to test your code properly you must start with the template starter code. The template is still very sparse and you have plenty of freedom to implement any algorithm you'd like so long as the inputs and outputs are the same.
