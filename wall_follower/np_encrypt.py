@@ -1,3 +1,9 @@
+"""
+DO NOT MODIFY THIS FILE.
+
+This encrypts/decrypts your numpy arrays for grading purposes.
+"""
+
 import numpy as np
 
 # http://www.brianveitch.com/cryptography/generate_rsa_keys.php
