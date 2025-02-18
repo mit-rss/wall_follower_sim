@@ -110,7 +110,7 @@ Import the `AckermannDriveStamped` type like this in your `wall_follower.py` fil
     
 ### 2. Read LIDAR Data
 
-The racecar has a 2D LIDAR sensor that measures distances from the racecar to its surroundings. All LIDAR data is published to the `/scan` topic.
+The racecar has a 2D LIDAR sensor that measures distances from the racecar to its surroundings. All LIDAR data is published to the `/scan` topic by the simulator (so you should only need to subscribe to this topic).
 
 The data is of type [`LaserScan`](http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html). You can import the type in python using:
 
