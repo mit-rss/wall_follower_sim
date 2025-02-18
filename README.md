@@ -80,9 +80,9 @@ You can change the position of the robot by clicking the "2D Pose Estimate" butt
 
 ### 3. Running the Tests
 
-Like last lab, you will be asked to run your tests locally and then submit the log.npz files that the tests generate. We have added two launch files to launch the correct simulator and tests (note: to add these files to your ros workspace see the changes to setup.py). 
+Like last lab, you will be asked to run your tests locally and then submit the log.npz files that the tests generate. We have added two launch files to launch the test simulator and tests (note: to add these files to your ros workspace see the changes to setup.py). 
 
-To launch the new simulator, run:
+To launch the test simulator, run:
 
     ros2 launch wall_follower launch_test_sim.launch.py
 
@@ -92,7 +92,7 @@ To launch the tests (which will automatically launch your wall follower as well)
 
     ros2 launch wall_follower launch_test.launch.py
 
-You can view the tests running in `rviz`.
+You can view the tests running in `rviz`. Note that you can visualize the target end position by adding the "/end_position_marker" topic to rviz.
 
 <br />
 
