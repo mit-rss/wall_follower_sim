@@ -128,7 +128,7 @@ class WallTest(Node):
         self.publish_end_position_marker()  
 
         # Give buffer time for controller to begin working before letting the car go
-        if self.buffer_count < 30:
+        if self.buffer_count < 50:
             self.place_car(self.START_POSE)
             self.buffer_count += 1
             if self.buffer_count == 30:
@@ -157,7 +157,7 @@ class WallTest(Node):
                 return
             else:
                 self.moved = True
-                self.get_logger().info('Moved: %s' % (self.moved))
+                # self.get_logger().info('Moved: %s' % (self.moved))
                 self.start_time = self.get_clock().now()
         
 
@@ -188,7 +188,6 @@ class WallTest(Node):
         dist = np.sum(dists)/dists.shape[0]
         # self.get_logger().info('Avg dist: %f' % (dist))
 
-        
         pos = [t.transform.translation.x, t.transform.translation.y]
         
         time = self.get_clock().now() - self.start_time
@@ -199,9 +198,7 @@ class WallTest(Node):
         #             f'Time: {time_d}, Max time: {self.max_time_per_test}')
 
         if time_d > self.max_time_per_test:
-            self.get_logger().info("******************************************************************************")
-            self.get_logger().info("ERROR: Test timed out! Your car was not able to reach the target end position.")
-            self.get_logger().info("******************************************************************************")
+            self.get_logger().error("\n\n\n\n\nERROR: Test timed out! Your car was not able to reach the target end position.\n\n\n\n\n")
             # Send a message of zero
             stop = AckermannDriveStamped()
             stop.drive.speed = 0.
@@ -211,9 +208,7 @@ class WallTest(Node):
             np.savez_compressed(self.TEST_NAME+"_log", **self.saves)
             raise SystemExit
         if self.dist_to_end < self.end_threshold:
-            self.get_logger().info("******************************************************************************")
-            self.get_logger().info("Reached the end of the test with Avg dist from the wall = %f!" % (dist))
-            self.get_logger().info("******************************************************************************")
+            self.get_logger().info("\n\n\n\n\nReached end of the test w/ Avg dist from wall = %f!\n\n\n\n\n" % (dist))
             stop = AckermannDriveStamped()
             stop.drive.speed = 0.
             stop.drive.steering_angle = 0.

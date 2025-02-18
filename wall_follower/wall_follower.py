@@ -5,6 +5,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from ackermann_msgs.msg import AckermannDriveStamped
 from visualization_msgs.msg import Marker
+from rcl_interfaces.msg import SetParametersResult
 
 from wall_follower.visualization_tools import VisualizationTools
 
@@ -30,10 +31,28 @@ class WallFollower(Node):
 	# TODO: Initialize your publishers and subscribers here
 
     # TODO: Write your callback functions here    
+    
+    def parameters_callback(self, params):
+        """
+        DO NOT MODIFY THIS CALLBACK FUNCTION!
+        
+        This is used by the test cases to modify the parameters during testing. 
+        It's called whenever a parameter is set via 'ros2 param set'.
+        """
+        for param in params:
+            if param.name == 'side':
+                self.SIDE = param.value
+                self.get_logger().info(f"Updated side to {self.SIDE}")
+            elif param.name == 'velocity':
+                self.VELOCITY = param.value
+                self.get_logger().info(f"Updated velocity to {self.VELOCITY}")
+            elif param.name == 'desired_distance':
+                self.DESIRED_DISTANCE = param.value
+                self.get_logger().info(f"Updated desired_distance to {self.DESIRED_DISTANCE}")
+        return SetParametersResult(successful=True)
 
 
 def main():
-    
     rclpy.init()
     wall_follower = WallFollower()
     rclpy.spin(wall_follower)
