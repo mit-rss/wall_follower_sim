@@ -44,7 +44,7 @@ def generate_launch_description():
             "pose_topic": "/pose",
             "velocity": 1.,
             "desired_distance": 1.,
-            "side": -1,
+            "side": -1,  # Right wall
             "start_x": -4.,
             "start_y": -5.4,
             "start_z": 0,
@@ -155,7 +155,7 @@ def generate_launch_description():
             "pose_topic": "/pose",
             "velocity": 1.,
             "desired_distance": 1.,
-            "side": 1,
+            "side": 1,  # Left wall
             "start_x": 5.,
             "start_y": -4.4,
             "start_z": np.pi - 0.001,
@@ -181,7 +181,7 @@ def generate_launch_description():
             "pose_topic": "/pose",
             "velocity": 2.,
             "desired_distance": 1.,
-            "side": -1,
+            "side": -1,  # Right wall
             "start_x": -4.,
             "start_y": -5.,
             "start_z":  -np.pi/4,
@@ -207,7 +207,7 @@ def generate_launch_description():
             "pose_topic": "/pose",
             "velocity": 2.,
             "desired_distance": 1.,
-            "side": 1,
+            "side": 1,  # Left wall
             "start_x": 5.,
             "start_y": -4.,
             "start_z":  3*np.pi/4.,
@@ -233,7 +233,7 @@ def generate_launch_description():
             "pose_topic": "/pose",
             "velocity": 2.,
             "desired_distance": 1.,
-            "side": -1,
+            "side": -1,  # Right wall
             "start_x": -4.,
             "start_y": -5.4,
             "start_z":  -np.pi/6.,
@@ -259,7 +259,7 @@ def generate_launch_description():
             "pose_topic": "/pose",
             "velocity": 3.,
             "desired_distance": 0.72,
-            "side": 1,
+            "side": 1,  # Left wall
             "start_x": -7.,
             "start_y": 10.6,
             "start_z":  0.,

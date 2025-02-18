@@ -16,10 +16,7 @@ from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
 
 
-
 class WallTest(Node):
-
-    
     def __init__(self):
         super().__init__("test_wall_follower")
         # Declare parameters to make them available for use
@@ -73,6 +70,9 @@ class WallTest(Node):
         self.pose_pub = self.create_publisher(Pose, "pose" , 1)
         self.drive_pub = self.create_publisher(AckermannDriveStamped, self.DRIVE_TOPIC, 1)
 
+        # A publisher for the end position marker
+        self.marker_pub = self.create_publisher(Marker, '/end_position_marker', 1)
+
         # A subscriber to laser scans
         self.create_subscription(LaserScan, self.SCAN_TOPIC, self.laser_callback, 1)
 
@@ -98,9 +98,34 @@ class WallTest(Node):
         self.pose_pub.publish(p)
         self.get_logger().info('Placed Car: %f' % (p.position.x))
         self.get_logger().info('Placed Car: %f' % (p.position.y))
+        
+    
+    def publish_end_position_marker(self):
+        """ Visualize the end position of the test """
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.header.stamp = self.get_clock().now().to_msg()
+        marker.ns = "end_position"
+        marker.id = 0
+        marker.type = Marker.SPHERE
+        marker.action = Marker.ADD
+        marker.pose.position.x = self.END_x
+        marker.pose.position.y = self.END_y
+        marker.pose.position.z = 0.0
+        marker.scale.x = 0.5
+        marker.scale.y = 0.5
+        marker.scale.z = 0.5
+        marker.color.a = 1.0  # Alpha
+        marker.color.r = 0.0  # Red
+        marker.color.g = 1.0  # Green
+        marker.color.b = 0.0  # Blue
+        
+        self.marker_pub.publish(marker)
 
 
-    def laser_callback(self, laser_scan):        
+    def laser_callback(self, laser_scan):    
+        
+        self.publish_end_position_marker()  
 
         if self.buffer_count < 30:
             self.place_car(self.START_POSE)
@@ -141,8 +166,7 @@ class WallTest(Node):
                 num = ranges.shape[0])
 
         # Convert the ranges to Cartesian coordinates.
-        # Consider the robot to be facing in the
-        # positive x direction.
+        # Consider the robot to be facing in the positive x direction.
         x = ranges * np.cos(angles)
         y = ranges * np.sin(angles)
 
@@ -159,7 +183,7 @@ class WallTest(Node):
         # Compute the average distance
         dists = np.abs(y[valid_points])
         dist = np.sum(dists)/dists.shape[0]
-        self.get_logger().info('Avg dist: %f' % (dist))
+        # self.get_logger().info('Avg dist: %f' % (dist))
 
         
         pos = [t.transform.translation.x, t.transform.translation.y]
@@ -171,10 +195,10 @@ class WallTest(Node):
         # self.get_logger().info(
         #             f'Time: {time_d}, Max time: {self.max_time_per_test}')
 
-        
-        
         if time_d > self.max_time_per_test:
-            self.get_logger().info("Test timed out!")
+            self.get_logger().info("******************************************************************************")
+            self.get_logger().info("ERROR: Test timed out! Your car was not able to reach the target end position.")
+            self.get_logger().info("******************************************************************************")
             # Send a message of zero
             stop = AckermannDriveStamped()
             stop.drive.speed = 0.
@@ -184,7 +208,9 @@ class WallTest(Node):
             np.savez_compressed(self.TEST_NAME+"_log", **self.saves)
             raise SystemExit
         if self.dist_to_end < self.end_threshold:
-            self.get_logger().info("Reached the end of the test!")
+            self.get_logger().info("******************************************************************************")
+            self.get_logger().info("Reached the end of the test with Avg dist from the wall = %f!" % (dist))
+            self.get_logger().info("******************************************************************************")
             stop = AckermannDriveStamped()
             stop.drive.speed = 0.
             stop.drive.steering_angle = 0.
@@ -193,11 +219,8 @@ class WallTest(Node):
             np.savez_compressed(self.TEST_NAME+"_log", **self.saves)
             raise SystemExit
 
-    
-
 
 def main():
-    
     rclpy.init()
     wall_follower_test = WallTest()
     try:
