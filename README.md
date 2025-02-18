@@ -132,14 +132,6 @@ There is a [params.yaml](https://github.com/mit-rss/wall_follower_sim/blob/maste
 
 Not only is this param file useful for efficiently testing different configurations, **it is NECESSARY for the autograder**! Therefore, your wall follower must import and use these parameters so that the autograder can test the various test cases.
 
-***IMPORTANT***: the following 3 lines must be added to your `laser_callback` function. This allows the autograder to update the desired side, distance, and velocity. These params should also not be manually overridden. 
-
-    self.SIDE = self.get_parameter('side').get_parameter_value().integer_value
-    self.VELOCITY = self.get_parameter('velocity').get_parameter_value().double_value
-    self.DESIRED_DISTANCE = self.get_parameter('desired_distance').get_parameter_value().double_value
-
-TODO: fix this
-
 (Note: the `scan_topic` and `drive_topic` parameters are optional, though defining topic names in a param file is generally good practice).
 
 <br />
