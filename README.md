@@ -56,17 +56,19 @@ However, feel free to add more Python files to keep your code organized.
 
 ### 1. Running the Simulator
 
-First, open [`rviz`](http://wiki.ros.org/rviz) using the right-click menu in the NoVNC browser graphical interface (which can be accessed at http://localhost:6080/vnc.html?resize=remote after the docker container is started). Note that you must open `rviz` ***before*** you run the simulator for the map to appear (since the map only is published once when the simulator is started).
+First, open [`rviz`](http://wiki.ros.org/rviz) using the right-click menu in the NoVNC browser graphical interface (which can be accessed at http://localhost:6080/vnc.html?resize=remote after the docker container is started). 
 
 Launch the [racecar simulator](https://github.com/mit-racecar/racecar_simulator) by running (from any directory):
 
     ros2 launch racecar_simulator simulate.launch.xml
 
+Note that you must open `rviz` ***before*** you launch the racecar simulator for the map to appear (since the map only is published once when the simulator is started).
+
 You should see a car in a map (walls are black, empty space is grey) and colorful points on that map representing lidar detections.
 
 ![The racecar in the starting position](https://raw.githubusercontent.com/mit-racecar/racecar_simulator/master/media/racecar_simulator_rviz_1.png)
 
-You can change the position of the robot by clicking the "2D Pose Estimate" button on top of rviz and placing the somewhere on the map.
+You can change the position of the robot by clicking the "2D Pose Estimate" button on top of rviz and placing the arrow somewhere on the map.
 
 **Note that the simulator does not simulate collisions, but the autograder will check that your car has not crashed.**
 
@@ -138,17 +140,17 @@ Not only is this param file useful for efficiently testing different configurati
 
 TODO: fix this
 
-(Note: the `scan_topic` and `drive_topic` parameters are optional, though keeping topic names in a param file is good practice).
+(Note: the `scan_topic` and `drive_topic` parameters are optional, though defining topic names in a param file is generally good practice).
 
 <br />
 
 ## Steps to Success
 How you implement the wall follower is entirely up to you. However, these are some key tips we compiled that will set you in the right direction:
 
-* __Set up ROS structure__: Begin by setting up your wall follower node so that it subscribes to laser messages and publishes steering commands. Make sure you can make the racecar move fowards at a constant speed and turning angle before working on your controller.
-* __Slice up the scan__: Consider slicing the ```ranges``` data into more useful pieces. A majority of the data won’t be useful to you if you only care about a wall to one side. When you can, try to use [```numpy```](https://numpy.org/) operations rather than for loops in your code. [Multidimensional slicing](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.indexing.html) and [broadcasting](https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html) can make your code cleaner and much more efficient. You can also turn any array into a ```numpy``` array with [```np.array```](https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.array.html).
-* __Find the wall__: There are many ways to detect a wall in a laser scan. In a perfect world, you might be able to detect it using 2 samples of the LIDAR data. However with noisy data and uneven surfaces this might not be enough. A [least squares regression](https://en.wikipedia.org/wiki/Simple_linear_regression) is an easy way to account for more noise. The [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus) algorithm can “upgrade” an existing model (like least squares) to be more robust to outliers. _Note: Attempt RANSAC only if you've already built a functional wall follower. It is probably overkill._
-* __Use PD or PID control__: A robust wall follower algorithm that can handle wavy wall contours and corners should probably use some sort of [PD or PID control](https://en.wikipedia.org/wiki/PID_controller#Discrete_implementation). Simple P (proportional) control is often not enough to create a responsive and stable system. Tuning the constants of this system can be done through empirical observations or more [systematically](https://www.crossco.com/resources/technical/how-to-tune-pid-loops/).
+* __One step at a time__: Begin by setting up your wall follower node so that it subscribes to laser messages and publishes steering commands. Make sure you can move the racecar at a constant speed and turning angle before working on your controller.
+* __Slice up the scan__: Consider slicing the ```ranges``` data into more useful pieces. A majority of the data won’t be useful to you if you only care about a wall to one side. When you can, try to use [```numpy```](https://numpy.org/) operations rather than for loops in your code. [Multidimensional slicing](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.indexing.html) and [broadcasting](https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html) can make your code cleaner and much more efficient.
+* __Find the wall__: In a perfect world, you might be able to detect the wall by fitting a line to 2 samples of the LIDAR data. However with noisy data and uneven surfaces this might not be enough. A [least squares regression](https://en.wikipedia.org/wiki/Simple_linear_regression) is an easy way to account for more noise. The [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus) outlier-rejection algorithm can further “upgrade” an existing model (like least squares). _Note: Attempt RANSAC only if you've already built a functional wall follower. It is probably overkill._
+* __Use PD or PID control__: There are multiple ways to implement your control logic; for example, PID control can be used to stabilize your robot to a fixed distance from a wall, while Pure Pursuit with Ackermann dynamics can be used to follow a path defined by the wall. While both methods work, PD/PID control is more well-known for handling disturbances like curved walls and corners. Simple P (proportional) control is often not enough to create a responsive and stable system. Tuning the constants of this system can be done through empirical observations or more [systematically](https://www.crossco.com/resources/technical/how-to-tune-pid-loops/).
 * __Use the visualization code__: We provided an example Python script in `wall_follower` that plots a line in Rviz. You can write something similar to this in order to make sure your code (e.g. wall detection) is working!
 
 
@@ -171,6 +173,8 @@ You may have noticed that the simulator has a few parameters defined in [params.
 - `max_steering_angle`: 0.34 radians
 
 You generally should not modify these; they will be reset by the autograder.
+
+<br />
 
 
 #### If you don't see the car appearing in the rviz simulation:
