@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import numpy as np
+import time as pythontime
 import rclpy
 import tf2_ros
 import tf_transformations
@@ -78,10 +79,11 @@ class WallTest(Node):
 
         self.START_POSE = [self.START_x, self.START_y, self.START_z]
         self.END_POSE = [self.END_x, self.END_y]
+        
+        self.buffer_count = 0
         self.place_car(self.START_POSE)
 
         self.moved = False
-        self.buffer_count = 0
     
     def place_car(self, pose):
         p = Pose()
@@ -96,8 +98,7 @@ class WallTest(Node):
         p.orientation.w = quaternion[3]
 
         self.pose_pub.publish(p)
-        self.get_logger().info('Placed Car: %f' % (p.position.x))
-        self.get_logger().info('Placed Car: %f' % (p.position.y))
+        pythontime.sleep(0.05)
         
     
     def publish_end_position_marker(self):
@@ -123,13 +124,15 @@ class WallTest(Node):
         self.marker_pub.publish(marker)
 
 
-    def laser_callback(self, laser_scan):    
-        
+    def laser_callback(self, laser_scan):         
         self.publish_end_position_marker()  
 
+        # Give buffer time for controller to begin working before letting the car go
         if self.buffer_count < 30:
             self.place_car(self.START_POSE)
             self.buffer_count += 1
+            if self.buffer_count == 30:
+                self.get_logger().info(f"Placed Car: {self.START_POSE[0]}, {self.START_POSE[1]}")
             return
 
         from_frame_rel = 'base_link'

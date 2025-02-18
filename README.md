@@ -165,6 +165,11 @@ There will be 6 log files created for 6 tests. These logs files will appear in y
 
 ## Troubleshooting and Other Notes
 
+#### When in doubt:
+
+Try restarting both the simulator and your wall follower node. We've seen strange issues where the laser scan publisher seems to stop working... a simple restart of the simulator node fixes this.
+
+
 #### Simulator Parameters
 
 You may have noticed that the simulator has a few parameters defined in [params.yaml](https://github.com/mit-racecar/racecar_simulator/blob/master/params.yaml):
