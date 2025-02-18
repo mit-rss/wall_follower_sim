@@ -130,7 +130,7 @@ There is a [params.yaml](https://github.com/mit-rss/wall_follower_sim/blob/maste
 * `velocity`: speed the racecar should move in meters per second
 * `side`: The side the wall is following represented as an integer. +1 represents the left wall and -1 represents the right wall. We chose this convention because typically we will assume the car is pointing in the positive _x_ direction. That means the left side of the car will point to the positive _y_ axis and the right side will point to the negative _y_ axis.  
 
-Not only is this param file useful for efficiently testing different configurations, **it is NECESSARY for the autograder**! Therefore, your wall follower must import and use these parameters so that the autograder can test the various test cases.
+Not only is this param file useful for efficiently testing different configurations, **it is NECESSARY for the autograder**! Therefore, your wall follower must fetch and use these parameters so that the autograder can test the various test cases.
 
 (Note: the `scan_topic` and `drive_topic` parameters are optional, though defining topic names in a param file is generally good practice).
 

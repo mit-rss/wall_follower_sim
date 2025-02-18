@@ -22,6 +22,7 @@ class WallFollower(Node):
         self.declare_parameter("desired_distance", "default")
 
         # Fetch constants from the ROS parameter server
+        # This is necessary for the tests to be able to test varying parameters!
         self.SCAN_TOPIC = self.get_parameter('scan_topic').get_parameter_value().string_value
         self.DRIVE_TOPIC = self.get_parameter('drive_topic').get_parameter_value().string_value
         self.SIDE = self.get_parameter('side').get_parameter_value().integer_value
