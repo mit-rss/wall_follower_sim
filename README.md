@@ -1,6 +1,7 @@
 | **Deliverable**  | **Due Date**                                 |
 |---------------|----------------------------------------------------------------------------|
-| `log.npz` on [Gradescope](https://www.gradescope.com/courses/973988) | Wednesday, February 26th at 1:00PM EST |
+| 6 `.npz` files on [Gradescope](https://www.gradescope.com/courses/973988) | Wednesday, February 26th at 1:00PM EST |
+| In-person Lab Checkoffs | Wednesday, February 26th, during lab |
 
 # Lab 2: Wall Following in Simulation
 
@@ -80,19 +81,23 @@ You can change the position of the robot by clicking the "2D Pose Estimate" butt
 
 ### 3. Running the Tests
 
-Like last lab, you will be asked to run your tests locally and then submit the log.npz files that the tests generate. We have added two launch files to launch the test simulator and tests (note: to add these files to your ros workspace see the changes to setup.py). 
+There are 6 test cases, with varying start and end positions, velocities, wall-side, and desired distances.
 
-To launch the test simulator, run:
+You will run your tests locally and submit the log.npz files that the tests generate. 
+
+First, launch the test simulator:
 
     ros2 launch wall_follower launch_test_sim.launch.py
 
-If you're curious, the tester code is in `/wall_follower_sim/wall_follower/test_wall_follower.py` 
-
-To launch the tests (which will automatically launch your wall follower as well), run:
+Then, launch the tests (which will automatically launch your wall follower as well):
 
     ros2 launch wall_follower launch_test.launch.py
 
 You can view the tests running in `rviz`. Note that you can visualize the target end position by adding the "/end_position_marker" topic to rviz.
+
+For an example of how the tests should look when running, see [this video](https://youtu.be/r7ygU1zlTjU). 
+
+If you're curious, the tester code is in `/wall_follower_sim/wall_follower/test_wall_follower.py` 
 
 <br />
 
@@ -148,9 +153,9 @@ How you implement the wall follower is entirely up to you. However, these are so
 
 ## Submission
 
-There will be 6 log files created for 6 tests. These logs files will appear in your ROS2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all your test files to the [gradescope assignment](https://www.gradescope.com/courses/728544). 
+Running the tests (see [[3. Running the Tests]](https://github.com/mit-rss/wall_follower_sim#3-running-the-tests)) will generate 6 log files that will appear in your ROS2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all 6 test files to the [gradescope assignment](https://www.gradescope.com/courses/728544). 
 
-(If you have not generated all the files because you have not passed all the tests you can still get partial points from submitting whatever files you do have.)
+(If you have not generated all the files because you have not passed all the tests, you can still get partial points from submitting whatever files you do have.)
 
 
 <br /><br />

@@ -128,7 +128,7 @@ class WallTest(Node):
         self.publish_end_position_marker()  
 
         # Give buffer time for controller to begin working before letting the car go
-        if self.buffer_count < 50:
+        if self.buffer_count < 100:
             self.place_car(self.START_POSE)
             self.buffer_count += 1
             if self.buffer_count == 30:

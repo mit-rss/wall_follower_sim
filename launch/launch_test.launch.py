@@ -13,30 +13,9 @@ import numpy as np
 
 
 def generate_launch_description():
-     
     ############################################################################
-    ### Define wall follower node and test nodes
+    ### Define test nodes and all their parameters
     ############################################################################
-    wall_follower = Node(
-        package="wall_follower",
-        executable="wall_follower",
-        namespace='wall_follower_ns',
-        parameters=[
-            {"scan_topic": "/scan",
-            "drive_topic": "/drive",
-            "velocity": 1.,
-            "desired_distance": 1.,
-            "side": -1}],
-        name='wall_follower',
-        remappings=[
-            ('/wall_follower_ns/pose', '/pose'),
-            ('/wall_follower_ns/map', '/map'),
-            ('/wall_follower_ns/base_link', '/base_link'),
-            ('/wall_follower_ns/tf', '/tf'),
-            ('/wall_follower_ns/tf_static', '/tf_static'),
-        ]
-    )
-
     test1 = Node(
         package="wall_follower",
         executable="test_wall_follower",
@@ -201,6 +180,30 @@ def generate_launch_description():
     
     
     ############################################################################
+    ### Define wall follower node
+    ############################################################################
+    wall_follower = Node(
+        package="wall_follower",
+        executable="wall_follower",
+        namespace='wall_follower_ns',
+        parameters=[
+            {"scan_topic": "/scan",
+            "drive_topic": "/drive",
+            "velocity": 1.,
+            "desired_distance": 1.,
+            "side": -1}],
+        name='wall_follower',
+        remappings=[
+            ('/wall_follower_ns/pose', '/pose'),
+            ('/wall_follower_ns/map', '/map'),
+            ('/wall_follower_ns/base_link', '/base_link'),
+            ('/wall_follower_ns/tf', '/tf'),
+            ('/wall_follower_ns/tf_static', '/tf_static'),
+        ]
+    )
+    
+    
+    ############################################################################
     ### Define commands to change parameters of the wall_follower node
     ############################################################################
     setup_side2 = ExecuteProcess(
@@ -314,7 +317,15 @@ def generate_launch_description():
                 on_exit=[
                     LogInfo(msg='Test 1 finished, Starting Test 2'),
                     test2,
-                    setup_side2
+                    setup_side2,
+                    TimerAction(  # Wait 1 second, then run setup_side2 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side2],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_side2 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side2],
+                    )
                 ]
             )
         ),
@@ -327,7 +338,23 @@ def generate_launch_description():
                     LogInfo(msg='Test 2 finished, Starting Test 3'),
                     test3,
                     setup_side3,
-                    setup_v3
+                    setup_v3,
+                    TimerAction(  # Wait 1 second, then run setup_side3 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side3],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_v3 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_v3],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_side3 again (trying to increase reliability)
+                        period=0.5,
+                        actions=[setup_side3],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_v3 again (trying to increase reliability)
+                        period=0.5,
+                        actions=[setup_v3],
+                    )
                 ]
             )
         ),
@@ -339,7 +366,15 @@ def generate_launch_description():
                 on_exit=[
                     LogInfo(msg='Test 3 finished, Starting Test 4'),
                     test4,
-                    setup_side4
+                    setup_side4,
+                    TimerAction(  # Wait 1 second, then run setup_side4 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side4],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_side4 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side4],
+                    )
                 ]
             )
         ),
@@ -351,7 +386,15 @@ def generate_launch_description():
                 on_exit=[
                     LogInfo(msg='Test 4 finished, Starting Test 5'),
                     test5,
-                    setup_side5
+                    setup_side5,
+                    TimerAction(  # Wait 1 second, then run setup_side5 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side5],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_side5 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side5],
+                    )
                 ]
             )
         ),
@@ -365,7 +408,31 @@ def generate_launch_description():
                     test6,
                     setup_side6,
                     setup_v6,
-                    setup_d6
+                    setup_d6,
+                    TimerAction(  # Wait 1 second, then run setup_side6 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_side6],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_v6 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_v6],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_d6 again (trying to increase reliability)
+                        period=1.0,
+                        actions=[setup_d6],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_side6 again (trying to increase reliability)
+                        period=0.3,
+                        actions=[setup_side6],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_v6 again (trying to increase reliability)
+                        period=0.3,
+                        actions=[setup_v6],
+                    ),
+                    TimerAction(  # Wait 1 second, then run setup_d6 again (trying to increase reliability)
+                        period=0.3,
+                        actions=[setup_d6],
+                    )
                 ]
             )
         ),
