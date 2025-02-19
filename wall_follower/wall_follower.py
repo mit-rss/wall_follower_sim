@@ -35,9 +35,9 @@ class WallFollower(Node):
         # DO NOT MODIFY THIS! 
         self.add_on_set_parameters_callback(self.parameters_callback)
   
-	# TODO: Initialize your publishers and subscribers here
+        # TODO: Initialize your publishers and subscribers here
 
-    # TODO: Write your callback functions here    
+        # TODO: Write your callback functions here    
     
     def parameters_callback(self, params):
         """
