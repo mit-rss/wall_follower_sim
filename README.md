@@ -1,6 +1,6 @@
 | **Deliverable**  | **Due Date**                                 |
 |---------------|----------------------------------------------------------------------------|
-| 6 `.npz` files on [Gradescope](https://www.gradescope.com/courses/973988) | Wednesday, February 26th at 1:00PM EST |
+| 6x `TEST_NAME_log.npz` files on [Gradescope](https://www.gradescope.com/courses/973988) | Wednesday, February 26th at 1:00PM EST |
 | In-person Lab Checkoffs | Wednesday, February 26th, during lab |
 
 # Lab 2: Wall Following in Simulation
@@ -20,6 +20,8 @@
 <br />
 
 ## Introduction
+
+[[Link to Lab Slides]](https://docs.google.com/presentation/d/1PAG9HPgg0wHRsm3TJ2rP1a3a17MZg4Sk/edit?usp=sharing&ouid=106827498769638621680&rtpof=true&sd=true)
 
 In this lab, you will be implementing a wall follower on a simulated racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maintaining a constant distance from a wall on either its left or right (chosen on the fly). It should be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from deviations from the desired state; being too far, too close, or too angled.
 
