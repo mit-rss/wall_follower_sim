@@ -16,6 +16,7 @@
 - [Steps to Success](https://github.com/mit-rss/wall_follower_sim#steps-to-success)
 - [Submission](https://github.com/mit-rss/wall_follower_sim#submission)
 - [Troubleshooting and Other Notes](https://github.com/mit-rss/wall_follower_sim#troubleshooting-and-other-notes)
+- [Frequently Used Instructions](https://github.com/mit-rss/frequently_used_instructions)
 
 <br />
 
