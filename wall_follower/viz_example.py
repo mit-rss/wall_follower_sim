@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+This is an example of how to use the VisualizationTools class to publish a line 
+to the /wall topic.
+
+You do not need this for your wall follower!
+"""
+
 import rclpy
 import numpy as np
 from rclpy.node import Node
