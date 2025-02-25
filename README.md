@@ -75,13 +75,12 @@ You should see a car in a map (walls are black, empty space is grey) and colorfu
 
 You can change the position of the robot by clicking the "2D Pose Estimate" button on top of rviz and placing the arrow somewhere on the map.
 
-**Note that the simulator does not simulate collisions, but the autograder will check that your car has not crashed.**
-
 
 ### 2. Running your Wall Follower
 
     ros2 launch wall_follower wall_follower.launch.xml
 
+***Note that you can modify and rerun your wall follower without needing to restart the simulator. Run the simulator once... and leave it running.***
 
 ### 3. Running the Tests
 
@@ -102,6 +101,8 @@ You can view the tests running in `rviz`. Note that you can visualize the target
 For an example of how the tests should look when running, see [this video](https://youtu.be/r7ygU1zlTjU). 
 
 If you're curious, the tester code is in `/wall_follower_sim/wall_follower/test_wall_follower.py` 
+
+**Note that, while the simulator does not simulate collisions, the autograder will check that your car has not crashed.**
 
 <br />
 
@@ -149,7 +150,7 @@ Not only is this param file useful for efficiently testing different configurati
 How you implement the wall follower is entirely up to you. However, these are some key tips we compiled that will set you in the right direction:
 
 * __One step at a time__: Begin by setting up your wall follower node so that it subscribes to laser messages and publishes steering commands. Make sure you can move the racecar at a constant speed and turning angle before working on your controller.
-* __Slice up the scan__: Consider slicing the ```ranges``` data into more useful pieces. A majority of the data won’t be useful to you if you only care about a wall to one side. When you can, try to use [```numpy```](https://numpy.org/) operations rather than for loops in your code. [Multidimensional slicing](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.indexing.html) and [broadcasting](https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html) can make your code cleaner and much more efficient.
+* __Slice up the scan__: Only a subset of the laserscan points will be useful to you -- how you filter these points will ***significantly*** impact your wall follower's performance. Think carefully about which laserscan points matter -- should you threshold by angle? by distance? by x- and y- coordinate (relative to the `base_link` frame)? Seriously, draw it out (based on the test cases) and think it through. When filtering the laserscan points, Try to use [```numpy```](https://numpy.org/) operations rather than for loops in your code. [Multidimensional slicing](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.indexing.html) and [broadcasting](https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html) can make your code cleaner and much more efficient.
 * __Find the wall__: In a perfect world, you might be able to detect the wall by fitting a line to 2 samples of the LIDAR data. However with noisy data and uneven surfaces this might not be enough. A [least squares regression](https://en.wikipedia.org/wiki/Simple_linear_regression) is an easy way to account for more noise. The [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus) outlier-rejection algorithm can further “upgrade” an existing model (like least squares). _Note: Attempt RANSAC only if you've already built a functional wall follower. It is probably overkill._
 * __Use PD or PID control__: There are multiple ways to implement your control logic; for example, PID control can be used to stabilize your robot to a fixed distance from a wall, while Pure Pursuit with Ackermann dynamics can be used to follow a path defined by the wall. While both methods work, PD/PID control is more well-known for handling disturbances like curved walls and corners. Simple P (proportional) control is often not enough to create a responsive and stable system. Tuning the constants of this system can be done through empirical observations or more [systematically](https://www.crossco.com/resources/technical/how-to-tune-pid-loops/).
 * __Use the visualization code__: We provided an example Python script in `wall_follower` that plots a line in Rviz. You can write something similar to this in order to make sure your code (e.g. wall detection) is working!
