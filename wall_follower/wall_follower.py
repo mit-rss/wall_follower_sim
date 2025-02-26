@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
+from ast import Tuple
+from math import pi
 import numpy as np
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
-from ackermann_msgs.msg import AckermannDriveStamped
+from ackermann_msgs.msg import AckermannDriveStamped, AckermannDrive
 from visualization_msgs.msg import Marker
 from rcl_interfaces.msg import SetParametersResult
+from std_msgs.msg import Header
 
 from wall_follower.visualization_tools import VisualizationTools
 
@@ -15,7 +18,7 @@ class WallFollower(Node):
     def __init__(self):
         super().__init__("wall_follower")
         # Declare parameters to make them available for use
-        # DO NOT MODIFY THIS! 
+        # DO NOT MODIFY THIS!
         self.declare_parameter("scan_topic", "default")
         self.declare_parameter("drive_topic", "default")
         self.declare_parameter("side", "default")
@@ -29,21 +32,99 @@ class WallFollower(Node):
         self.SIDE = self.get_parameter('side').get_parameter_value().integer_value
         self.VELOCITY = self.get_parameter('velocity').get_parameter_value().double_value
         self.DESIRED_DISTANCE = self.get_parameter('desired_distance').get_parameter_value().double_value
-		
+
         # This activates the parameters_callback function so that the tests are able
         # to change the parameters during testing.
-        # DO NOT MODIFY THIS! 
+        # DO NOT MODIFY THIS!
+        self.most_recent_time = 0
+        self.most_recent_theta = 0
         self.add_on_set_parameters_callback(self.parameters_callback)
-  
-        # TODO: Initialize your publishers and subscribers here
 
-        # TODO: Write your callback functions here    
-    
+        # TODO: Initialize your publishers and subscribers here
+        self.drive_publisher = self.create_publisher(AckermannDriveStamped, self.DRIVE_TOPIC, 10)
+        self.lidar_subscription = self.create_subscription(LaserScan, self.SCAN_TOPIC, self.laser_scan_callback, 10)
+        self.lidar_subscription
+        self.line_pub = self.create_publisher(Marker, "/wall", 1)
+        self.drive_msg = None
+
+    # TODO: Write your callback functions here
+    def send_drive_command(self, steering_angle):
+        """Sends a drive command based on the input steering angle. No
+        other params are changed."""
+        self.drive_msg = AckermannDriveStamped()
+
+        header = Header()
+        header.stamp = self.get_clock().now().to_msg()
+        header.frame_id = "racecar"
+        self.drive_msg.header = header
+
+        drive = AckermannDrive()
+        drive.steering_angle = steering_angle
+
+        drive.speed = self.VELOCITY
+        self.drive_msg.drive = drive
+
+        self.drive_publisher.publish(self.drive_msg)
+
+    def laser_scan_callback(self, msg):
+        """Laser scan callback."""
+
+        kp_gains = 1.5
+        kd_gains = 0.5
+
+        # Linear regression
+        line = self.plot_line(msg)
+        slope = line[0]
+        y_int = line[1]
+
+        # Visualize
+        x = np.linspace(-2., 2., num=20)
+        y = line[0]*x +line[1]
+        VisualizationTools.plot_line(x, y, self.line_pub, frame="/laser")
+
+
+        if True:
+            # Googled this error function
+            dist_to_wall = abs(y_int)/np.sqrt(slope**2 + 1)
+
+            if self.SIDE == 1:
+                theta_command = kp_gains*(abs(dist_to_wall) - self.DESIRED_DISTANCE) + kd_gains*(slope)
+            else:
+                theta_command = -kp_gains*(abs(dist_to_wall) - self.DESIRED_DISTANCE) + kd_gains*(slope)
+
+        # Send drive
+        self.send_drive_command(theta_command)
+        self.most_recent_time = msg.header.stamp.nanosec
+
+
+    def plot_line(self, scan):
+        """Linear regression. Range view max = 9."""
+
+        angle_min = scan.angle_min
+        ranges = scan.ranges
+        increment = scan.angle_increment
+        num_samples = len(ranges)
+
+        edited_ranges = [ranges[k] if ranges[k] < 9 else None for k in range(num_samples)]
+        if self.SIDE == -1:
+            rng = range(num_samples // 6, 4* num_samples // 6)
+        else:
+            rng = range(num_samples//2,  5*num_samples//6)
+
+        x = []
+        y = []
+        for k in rng:
+            if edited_ranges[k] is not None:
+                x.append(edited_ranges[k]*np.cos(angle_min + increment*k))
+                y.append(edited_ranges[k]*np.sin(angle_min + increment*k))
+
+        return np.polyfit(x, y, 1)
+
     def parameters_callback(self, params):
         """
         DO NOT MODIFY THIS CALLBACK FUNCTION!
-        
-        This is used by the test cases to modify the parameters during testing. 
+
+        This is used by the test cases to modify the parameters during testing.
         It's called whenever a parameter is set via 'ros2 param set'.
         """
         for param in params:
@@ -69,4 +150,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
