@@ -1,7 +1,7 @@
 | **Deliverable**  | **Due Date**                                 |
 |---------------|----------------------------------------------------------------------------|
 | 6x `TEST_NAME_log.npz` files on [Gradescope](https://www.gradescope.com/courses/973988) | Wednesday, February 26th at 1:00PM EST |
-| In-person Lab Checkoffs | Wednesday, February 26th, during lab |
+<!-- | In-person Lab Checkoffs | Wednesday, February 26th, during lab | -->
 
 # Lab 2: Wall Following in Simulation
 
