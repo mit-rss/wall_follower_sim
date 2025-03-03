@@ -8,7 +8,8 @@ from sensor_msgs.msg import LaserScan
 from ackermann_msgs.msg import AckermannDriveStamped, AckermannDrive
 from visualization_msgs.msg import Marker
 from rcl_interfaces.msg import SetParametersResult
-from std_msgs.msg import Header
+from std_msgs.msg import Header, Float64MultiArray
+from safe_drive_msgs.msg import SafeDriveMsg
 
 from wall_follower.visualization_tools import VisualizationTools
 
@@ -21,9 +22,10 @@ class WallFollower(Node):
         # DO NOT MODIFY THIS!
         self.declare_parameter("scan_topic", "default")
         self.declare_parameter("drive_topic", "default")
-        self.declare_parameter("side", "default")
-        self.declare_parameter("velocity", "default")
-        self.declare_parameter("desired_distance", "default")
+        self.declare_parameter("side", 0)
+        self.declare_parameter("velocity", 0.0)
+        self.declare_parameter("desired_distance", 0.0)
+        self.declare_parameter("safety_topic", "/safety_topic")
 
         # Fetch constants from the ROS parameter server
         # DO NOT MODIFY THIS! This is necessary for the tests to be able to test varying parameters!
@@ -32,6 +34,8 @@ class WallFollower(Node):
         self.SIDE = self.get_parameter('side').get_parameter_value().integer_value
         self.VELOCITY = self.get_parameter('velocity').get_parameter_value().double_value
         self.DESIRED_DISTANCE = self.get_parameter('desired_distance').get_parameter_value().double_value
+        self.SAFETY_TOPIC = self.get_parameter("safety_topic").get_parameter_value().string_value
+
 
         # This activates the parameters_callback function so that the tests are able
         # to change the parameters during testing.
@@ -41,16 +45,17 @@ class WallFollower(Node):
         self.add_on_set_parameters_callback(self.parameters_callback)
 
         # TODO: Initialize your publishers and subscribers here
-        self.drive_publisher = self.create_publisher(AckermannDriveStamped, self.DRIVE_TOPIC, 10)
+        self.drive_publisher = self.create_publisher(SafeDriveMsg, self.SAFETY_TOPIC, 10)
         self.lidar_subscription = self.create_subscription(LaserScan, self.SCAN_TOPIC, self.laser_scan_callback, 10)
         self.lidar_subscription
         self.line_pub = self.create_publisher(Marker, "/wall", 1)
         self.drive_msg = None
 
     # TODO: Write your callback functions here
-    def send_drive_command(self, steering_angle):
+    def send_drive_command(self, steering_angle, line_msg):
         """Sends a drive command based on the input steering angle. No
         other params are changed."""
+        safe_drive_msg = SafeDriveMsg()
         self.drive_msg = AckermannDriveStamped()
 
         header = Header()
@@ -63,8 +68,11 @@ class WallFollower(Node):
 
         drive.speed = self.VELOCITY
         self.drive_msg.drive = drive
+        safe_drive_msg.drive_msg = self.drive_msg
+        safe_drive_msg.line = line_msg
 
-        self.drive_publisher.publish(self.drive_msg)
+        self.drive_publisher.publish(safe_drive_msg)
+
 
     def laser_scan_callback(self, msg):
         """Laser scan callback."""
@@ -82,18 +90,18 @@ class WallFollower(Node):
         y = line[0]*x +line[1]
         VisualizationTools.plot_line(x, y, self.line_pub, frame="/laser")
 
-
-        if True:
             # Googled this error function
-            dist_to_wall = abs(y_int)/np.sqrt(slope**2 + 1)
+        dist_to_wall = abs(y_int)/np.sqrt(slope**2 + 1)
 
-            if self.SIDE == 1:
+        if self.SIDE == 1:
                 theta_command = kp_gains*(abs(dist_to_wall) - self.DESIRED_DISTANCE) + kd_gains*(slope)
-            else:
+        else:
                 theta_command = -kp_gains*(abs(dist_to_wall) - self.DESIRED_DISTANCE) + kd_gains*(slope)
 
+        line_msg = Float64MultiArray()
+        line_msg.data = [slope, y_int]
         # Send drive
-        self.send_drive_command(theta_command)
+        self.send_drive_command(theta_command, line_msg)
         self.most_recent_time = msg.header.stamp.nanosec
 
 

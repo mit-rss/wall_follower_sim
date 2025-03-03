@@ -27,10 +27,10 @@ class WallTest(Node):
 
         self.declare_parameter("side", 1)
         self.declare_parameter("velocity", 1.)
-        self.declare_parameter("desired_distance", 1)
+        self.declare_parameter("desired_distance", 1.0)
         self.declare_parameter("start_x", -4.)
         self.declare_parameter("start_y", -5.4)
-        self.declare_parameter("start_z", 0)
+        self.declare_parameter("start_z", 0.)
         self.declare_parameter("end_x", 5.)
         self.declare_parameter("end_y", -5.)
         self.declare_parameter("name", "default")
@@ -52,7 +52,7 @@ class WallTest(Node):
         self.END_y = self.get_parameter('end_y').get_parameter_value().double_value
         self.NAME = self.get_parameter('name').get_parameter_value().string_value
 
-        self.get_logger().info('Test Name %s' % (self.TEST_NAME))       
+        self.get_logger().info('Test Name %s' % (self.TEST_NAME))
 
 
         self.max_time_per_test = 120
@@ -79,12 +79,12 @@ class WallTest(Node):
 
         self.START_POSE = [self.START_x, self.START_y, self.START_z]
         self.END_POSE = [self.END_x, self.END_y]
-        
+
         self.buffer_count = 0
         self.place_car(self.START_POSE)
 
         self.moved = False
-    
+
     def place_car(self, pose):
         p = Pose()
 
@@ -99,8 +99,8 @@ class WallTest(Node):
 
         self.pose_pub.publish(p)
         pythontime.sleep(0.05)
-        
-    
+
+
     def publish_end_position_marker(self):
         """ Visualize the end position of the test """
         marker = Marker()
@@ -120,12 +120,12 @@ class WallTest(Node):
         marker.color.r = 0.0  # Red
         marker.color.g = 1.0  # Green
         marker.color.b = 0.0  # Blue
-        
+
         self.marker_pub.publish(marker)
 
 
-    def laser_callback(self, laser_scan):         
-        self.publish_end_position_marker()  
+    def laser_callback(self, laser_scan):
+        self.publish_end_position_marker()
 
         # Give buffer time for controller to begin working before letting the car go
         if self.buffer_count < 100:
@@ -147,8 +147,8 @@ class WallTest(Node):
             self.get_logger().info(
                 f'Could not transform {to_frame_rel} to {from_frame_rel}: {ex}')
             return
-        
-        if not self.moved: 
+
+        if not self.moved:
             diff = np.linalg.norm(np.array([self.START_x, self.START_y]) - np.array([t.transform.translation.x, t.transform.translation.y]))
             if 0.3 < (diff):
                 self.place_car(self.START_POSE)
@@ -159,7 +159,7 @@ class WallTest(Node):
                 self.moved = True
                 # self.get_logger().info('Moved: %s' % (self.moved))
                 self.start_time = self.get_clock().now()
-        
+
 
         ranges = np.array(laser_scan.ranges, dtype='float32')
 
@@ -189,7 +189,7 @@ class WallTest(Node):
         # self.get_logger().info('Avg dist: %f' % (dist))
 
         pos = [t.transform.translation.x, t.transform.translation.y]
-        
+
         time = self.get_clock().now() - self.start_time
         time_d = time.nanoseconds * 1e-9
         self.positions.append([time_d] + pos + [dist])
@@ -231,4 +231,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    

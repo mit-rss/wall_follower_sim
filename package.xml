@@ -15,6 +15,8 @@
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>visualization_msgs</depend>
+  <depend>safe_drive_msgs</depend>
+
 
   <export>
     <build_type>ament_python</build_type>
