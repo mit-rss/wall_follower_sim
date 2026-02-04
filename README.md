@@ -6,17 +6,16 @@
 # Lab 2: Wall Following in Simulation
 
 ## Table of Contents
-- [Introduction](https://github.com/mit-rss/wall_follower_sim#introduction)
-- [Downloading](https://github.com/mit-rss/wall_follower_sim#download-this-repository)
-- [Running](https://github.com/mit-rss/wall_follower_sim#running)
-    - [1. Running the Simulator](https://github.com/mit-rss/wall_follower_sim#1-running-the-simulator)
-    - [2. Running your Wall Follower](https://github.com/mit-rss/wall_follower_sim#2-running-your-wall-follower)
-    - [3. Running the Tests](https://github.com/mit-rss/wall_follower_sim#3-running-the-tests)
-- [Lab Overview](https://github.com/mit-rss/wall_follower_sim#lab-overview)
-- [Steps to Success](https://github.com/mit-rss/wall_follower_sim#steps-to-success)
-- [Submission](https://github.com/mit-rss/wall_follower_sim#submission)
-- [Troubleshooting and Other Notes](https://github.com/mit-rss/wall_follower_sim#troubleshooting-and-other-notes)
+- [Introduction](#introduction)
+- [Download this Repository](#download-this-repository)
+- [Running the Simulator/Wall Follower](#running)
+- [Lab Overview](#lab-overview)
+- [Steps to Success](#steps-to-success)
+- [Scoring](#scoring)
+- [Submission](#submission)
+- [Troubleshooting and Other Notes](#troubleshooting-and-other-notes)
 - [Frequently Used Instructions](https://github.com/mit-rss/frequently_used_instructions)
+
 
 <br />
 
