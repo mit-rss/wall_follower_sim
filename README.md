@@ -1,7 +1,7 @@
 | **Deliverable**  | **Due Date**                                 |
 |---------------|----------------------------------------------------------------------------|
 | 6x `TEST_NAME_log.npz` files on [Gradescope](https://www.gradescope.com/courses/1227626) | Wednesday, February 25th at 1:00PM EST |
-<!-- | In-person Lab Checkoffs | Wednesday, February 26th, during lab | -->
+| In-person Lab Checkoffs | Wednesday, February 25th, during lab |
 
 # Lab 2: Wall Following in Simulation
 
@@ -75,6 +75,11 @@ You should see a car in a map (walls are black, empty space is grey) and colorfu
 
 You can change the position of the robot by clicking the "2D Pose Estimate" button on top of rviz and placing the arrow somewhere on the map.
 
+As you see in the map on your screen, we're currently simulating the environment of the Stata basement. While you can certainly use this environment to develop your wall follower, for our tests, we'll be using a more challenging environment: the Building 31 basement. If you'd like to see what that looks like, you can kill the simulator above, and run the following command:
+
+    ros2 launch wall_follower launch_test_sim.launch.py
+
+You're welcome to use either environment to test your wall follower, but be sure to only have one simulator process running at a time. In Step 2, you will have to use the Building 31 environment to run our test cases.
 
 ### 2. Running your Wall Follower
 
@@ -95,6 +100,8 @@ First, launch the test simulator:
 Then, launch the tests (which will automatically launch your wall follower as well):
 
     ros2 launch wall_follower launch_test.launch.py
+
+***Right now, you should have at least 2 terminals open. Use the [tmux template](https://github.com/mit-rss/intro_to_linux/blob/master/tmux_template.yaml) from Lab 1 to see all of your terminals in the same window.***
 
 You can view the tests running in `rviz`. Note that you can visualize the target end position by adding the "/end_position_marker" topic to rviz.
 
