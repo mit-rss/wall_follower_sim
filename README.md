@@ -162,6 +162,29 @@ How you implement the wall follower is entirely up to you. However, these are so
 * __Use PD or PID control__: There are multiple ways to implement your control logic; for example, PID control can be used to stabilize your robot to a fixed distance from a wall, while Pure Pursuit with Ackermann dynamics can be used to follow a path defined by the wall. While both methods work, PD/PID control is more well-known for handling disturbances like curved walls and corners. Simple P (proportional) control is often not enough to create a responsive and stable system. Tuning the constants of this system can be done through empirical observations or more [systematically](https://www.crossco.com/resources/technical/how-to-tune-pid-loops/).
 * __Use the visualization code__: We provided an example Python script in `wall_follower` that plots a line in Rviz. You can write something similar to this in order to make sure your code (e.g. wall detection) is working!
 
+## Scoring
+
+In each test case we compute distances from the racecar to the wall on the appropriate side at regular time intervals.
+If your code is truly following a wall than it should minimize the average absolute difference between the distance to the wall and the desired distance to the wall.
+
+<!-- ![Eqn1](https://latex.codecogs.com/gif.latex?loss=\frac{1}{N}\sum_{i=0}^N|distance[i]-desired\\_distance|) -->
+
+![Eqn1](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_loss.png)
+    
+
+To turn this value into a score between 0 and 1 we compute:
+
+<!-- ![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1+(\alpha\cdot{loss})^2}) -->
+![Eqn2](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_score.png)
+
+Don't worry, it is impossible to get exactly 100%.
+In some test cases we start the racecar closer or farther to the wall than the desired distance, which will automatically lower the max score.
+The racecar also has to navigate around tight turns which it can't do perfectly with a limited turning radius.
+Moreover there are many ways to measure the distance to a wall so our metric might not match yours exactly.
+We have chosen ![alpha](https://latex.codecogs.com/gif.latex?\alpha), so your score will be in the high 90's for most of the tests. 
+Your score for the `short_left_far_angled` test will be lower than the others because the racecar starts far from the desired distance. Example TA grades below:
+
+![TA grades](https://c2.staticflickr.com/8/7882/33284090908_e04084e7d6_o.png)
 
 ## Submission
 
@@ -169,15 +192,11 @@ Running the tests (see [[3. Running the Tests]](https://github.com/mit-rss/wall_
 
 (If you have not generated all the files because you have not passed all the tests, you can still get partial points from submitting whatever files you do have.)
 
-
-<br /><br />
-
 ## Troubleshooting and Other Notes
 
 #### When in doubt:
 
 Try restarting both the simulator and your wall follower node. We've seen strange issues where the laser scan publisher seems to stop working... a simple restart of the simulator node fixes this.
-
 
 #### Simulator Parameters
 
