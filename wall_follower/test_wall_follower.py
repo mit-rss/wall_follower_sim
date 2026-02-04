@@ -27,12 +27,12 @@ class WallTest(Node):
 
         self.declare_parameter("side", 1)
         self.declare_parameter("velocity", 1.)
-        self.declare_parameter("desired_distance", 1)
-        self.declare_parameter("start_x", -4.)
+        self.declare_parameter("desired_distance", 1.0)
+        self.declare_parameter("start_x", -4.0)
         self.declare_parameter("start_y", -5.4)
-        self.declare_parameter("start_z", 0)
-        self.declare_parameter("end_x", 5.)
-        self.declare_parameter("end_y", -5.)
+        self.declare_parameter("start_z", 0.0)
+        self.declare_parameter("end_x", 5.0)
+        self.declare_parameter("end_y", -5.0)
         self.declare_parameter("name", "default")
 
 
