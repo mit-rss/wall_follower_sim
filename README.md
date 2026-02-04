@@ -101,6 +101,8 @@ Then, launch the tests (which will automatically launch your wall follower as we
 
     ros2 launch wall_follower launch_test.launch.py
 
+***Right now, you should have at least 2 terminals open. Use the [tmux template](https://github.com/mit-rss/intro_to_linux/blob/master/tmux_template.yaml) from Lab 1 to see all of your terminals in the same window.***
+
 You can view the tests running in `rviz`. Note that you can visualize the target end position by adding the "/end_position_marker" topic to rviz.
 
 For an example of how the tests should look when running, see [this video](https://youtu.be/r7ygU1zlTjU). 
