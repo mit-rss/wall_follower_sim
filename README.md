@@ -1,7 +1,7 @@
-| **Deliverable**  | **Due Date**                                 |
-|---------------|----------------------------------------------------------------------------|
-| 6x `TEST_NAME_log.npz` files on [Gradescope](https://www.gradescope.com/courses/1227626) | Wednesday, February 25th at 1:00PM EST |
-| In-person Lab Checkoffs | Wednesday, February 25th, during lab |
+| **Deliverable**                                                                                              | **Due Date**                           |
+|--------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| 6x `TEST_NAME_log.npz` files on [Gradescope](https://www.gradescope.com/courses/1227626/assignments/7471278) | Wednesday, February 25th at 1:00PM EST |
+| In-person Lab Checkoffs                                                                                      | Wednesday, February 25th, during lab   |
 
 # Lab 2: Wall Following in Simulation
 
@@ -60,19 +60,19 @@ However, feel free to add more Python files to keep your code organized.
 
 ### 1. Running the Simulator
 
-First, open [`rviz`](http://wiki.ros.org/rviz) using the right-click menu in the NoVNC browser graphical interface (which can be accessed at http://localhost:6080/vnc.html?resize=remote after the docker container is started). 
+First, open [`rviz2`](https://docs.ros.org/en/humble/p/rviz2/) using the right-click menu in the NoVNC browser graphical interface (which can be accessed at http://localhost:6080/vnc.html?resize=remote after the docker container is started). 
 
 Launch the [racecar simulator](https://github.com/mit-racecar/racecar_simulator) by running (from any directory):
 
     ros2 launch racecar_simulator simulate.launch.xml
 
-Note that you must open `rviz` ***before*** you launch the racecar simulator for the map to appear (since the map only is published once when the simulator is started).
+Note that you must open RViz ***before*** you launch the racecar simulator for the map to appear (since the map only is published once when the simulator is started).
 
 You should see a car in a map (walls are black, empty space is grey) and colorful points on that map representing lidar detections.
 
 ![The racecar in the starting position](https://raw.githubusercontent.com/mit-racecar/racecar_simulator/master/media/racecar_simulator_rviz_1.png)
 
-You can change the position of the robot by clicking the "2D Pose Estimate" button on top of rviz and placing the arrow somewhere on the map.
+You can change the position of the robot by clicking the "2D Pose Estimate" button on top of RViz and placing the arrow somewhere on the map.
 
 As you see in the map on your screen, we're currently simulating the environment of the Stata basement. While you can certainly use this environment to develop your wall follower, for our tests, we'll be using a more challenging environment: the Building 31 basement. If you'd like to see what that looks like, you can kill the simulator above, and run the following command:
 
@@ -102,7 +102,7 @@ Then, launch the tests (which will automatically launch your wall follower as we
 
 ***Right now, you should have at least 2 terminals open. Use the [tmux template](https://github.com/mit-rss/intro_to_linux/blob/master/tmux_template.yaml) from Lab 1 to see all of your terminals in the same window.***
 
-You can view the tests running in `rviz`. Note that you can visualize the target end position by adding the "/end_position_marker" topic to rviz.
+You can view the tests running in RViz. Note that you can visualize the target end position by adding the "/end_position_marker" topic to RViz.
 
 For an example of how the tests should look when running, see [this video](https://youtu.be/r7ygU1zlTjU). 
 
@@ -134,7 +134,7 @@ The data is of type [`LaserScan`](http://docs.ros.org/api/sensor_msgs/html/msg/L
 
 The `ranges` entry in the `LaserScan` message  is an array of the distances from the lidar sensor to the nearest obstacle. The measurements are taken at regular angular intervals of `angle_increment` radians, from the angle `angle_min` to `angle_max`.
 
-The rainbow points in this image below are the laser scan as visualized in `rviz`. The color corresponds to the intensity of the scan. In the simulator this is simply the distance, but on the actual lidar it gives you an indication of how reflective the object you are scanning is. Note that there is no data in the quadrant behind the car because the LIDAR sensor does not scan the full 360 degree range.
+The rainbow points in this image below are the laser scan as visualized in RViz. The color corresponds to the intensity of the scan. In the simulator this is simply the distance, but on the actual lidar it gives you an indication of how reflective the object you are scanning is. Note that there is no data in the quadrant behind the car because the LIDAR sensor does not scan the full 360 degree range.
 
 ![The racecar in a cubicle](https://raw.githubusercontent.com/mit-racecar/racecar_simulator/master/media/racecar_simulator_rviz_2.png)
 
@@ -166,28 +166,24 @@ How you implement the wall follower is entirely up to you. However, these are so
 In each test case we compute distances from the racecar to the wall on the appropriate side at regular time intervals.
 If your code is truly following a wall than it should minimize the average absolute difference between the distance to the wall and the desired distance to the wall.
 
-<!-- ![Eqn1](https://latex.codecogs.com/gif.latex?loss=\frac{1}{N}\sum_{i=0}^N|distance[i]-desired\\_distance|) -->
-
-![Eqn1](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_loss.png)
-    
+$$loss=\frac{1}{N}\sum_{i=0}^N\left|distance[i]-desired\\_distance\right|$$
 
 To turn this value into a score between 0 and 1 we compute:
 
-<!-- ![Eqn2](https://latex.codecogs.com/gif.latex?score=\frac{1}{1+(\alpha\cdot{loss})^2}) -->
-![Eqn2](https://github.com/mit-rss/wall_follower_sim/blob/master/wall_follower_score.png)
+$$score=\frac{1}{1+(\alpha\cdot{loss})^2}$$
 
 Don't worry, it is impossible to get exactly 100%.
 In some test cases we start the racecar closer or farther to the wall than the desired distance, which will automatically lower the max score.
 The racecar also has to navigate around tight turns which it can't do perfectly with a limited turning radius.
 Moreover there are many ways to measure the distance to a wall so our metric might not match yours exactly.
-We have chosen ![alpha](https://latex.codecogs.com/gif.latex?\alpha), so your score will be in the high 90's for most of the tests. 
+We have chosen $\alpha$, so your score will be in the high 90's for most of the tests. 
 Your score for the `short_left_far_angled` test will be lower than the others because the racecar starts far from the desired distance. Example TA grades below:
 
 ![TA grades](https://c2.staticflickr.com/8/7882/33284090908_e04084e7d6_o.png)
 
 ## Submission
 
-Running the tests (see [[3. Running the Tests]](https://github.com/mit-rss/wall_follower_sim#3-running-the-tests)) will generate 6 log files that will appear in your ROS2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all 6 test files to the [gradescope assignment](https://www.gradescope.com/courses/728544). 
+Running the tests (see [[3. Running the Tests]](https://github.com/mit-rss/wall_follower_sim#3-running-the-tests)) will generate 6 log files that will appear in your ROS2 workspace home: `racecar_docker/home/racecar_ws/TEST_NAME_log.npz` Submit all 6 test files to the [Gradescope assignment](https://www.gradescope.com/courses/1227626/assignments/7471278). 
 
 (If you have not generated all the files because you have not passed all the tests, you can still get partial points from submitting whatever files you do have.)
 
@@ -209,7 +205,7 @@ You generally should not modify these; they will be reset by the autograder.
 <br />
 
 
-#### If you don't see the car appearing in the rviz simulation:
+#### If you don't see the car appearing in the RViz simulation:
 Firstly, confirm that the simulator (`ros2 launch racecar_simulator simulate.launch.xml`) is running successfully.
 
 If so, if you're using the [racecar docker image](https://github.com/mit-racecar/racecar_docker), Rviz will already be configured to visualize the simulator. But if not, in the left panel on the bottom click the "Add" button, and then in the "By display type" tab click "RobotModel". You should see a small blue car appear. Then click "Add" again and in the "By topic" tab click add the "/map" topic.  Repeat once more to add the laser scan topic. Under the dropdown menu of your LaserScan there should be a field called "Size (m)". Change this to 0.1 so you can see the laser scan more clearly. The checkboxes turn on and off display types, which may be useful as you add topics to visualize.
