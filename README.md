@@ -19,6 +19,13 @@
 
 <br />
 
+## ⚠️ Before You Start Lab 2 (Required Setup)
+
+Before starting Lab 2, you **must** pull the latest Docker image. We have made some modifications since Lab 1 that will make things run smoother.
+
+From your **host machine** (not inside the Docker container), navigate to your `racecar_docker` folder and run:
+
+    docker compose pull
 
 ## Introduction
 
