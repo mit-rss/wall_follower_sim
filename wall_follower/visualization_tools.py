@@ -1,10 +1,11 @@
 from geometry_msgs.msg import Point
 from visualization_msgs.msg import Marker
 
+
 class VisualizationTools:
 
     @staticmethod
-    def plot_line(x, y, publisher, color = (1., 0., 0.), frame = "/base_link"):
+    def plot_line(x, y, publisher, color=(1.0, 0.0, 0.0), frame="/base_link"):
         """
         Publishes the points (x, y) to publisher
         so they can be visualized in rviz as
@@ -26,7 +27,7 @@ class VisualizationTools:
         # Set the size and color
         line_strip.scale.x = 0.1
         line_strip.scale.y = 0.1
-        line_strip.color.a = 1.
+        line_strip.color.a = 1.0
         line_strip.color.r = color[0]
         line_strip.color.g = color[1]
         line_strip.color.g = color[2]
