@@ -13,10 +13,12 @@ modulus = 7366846427
 
 pow_modulo = np.frompyfunc(pow, 3, 1)
 
+
 def encode(array):
     array_int = array.astype(np.float32).view(np.uint32).astype(np.uint64)
     array_int_enc = pow_modulo(array_int, public_key, modulus)
     return array_int_enc
+
 
 def decode(array):
     array_int = array.astype(np.uint64)
