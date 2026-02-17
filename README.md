@@ -31,7 +31,7 @@ From your **host machine** (not inside the Docker container), navigate to your `
 
 [[Link to Lab Slides]](https://docs.google.com/presentation/d/1sp8WougmLo8mEJXdvfs6KyGxbIw56jGo/edit)
 
-In this lab, you will be implementing a wall follower on a simulated racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maintaining a constant distance from a wall on either its left or right (chosen on the fly). It should be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from deviations from the desired state; being too far, too close, or too angled.
+In this lab, you will be implementing a wall follower on a simulated racecar. Your goal is to make an autonomous controller that drives the racecar forwards while maintaining a constant distance from a wall on either its left or right. We will set parameter to determine which side of the car we want to follow the wall, but the wall itself will be detected on the fly. It should be robust to uneven surfaces and small errors in the LIDAR data, and it should be able to recover from deviations from the desired state; being too far, too close, or not parallel to the wall.
 
 <img src="wall_follower.gif" alt="Thumbnail GIF" width="300">
 
@@ -42,6 +42,8 @@ We have made a series of tests to evaluate the performance of your wall follower
 <br />
 
 ## Download this Repository
+
+All instructions detailed here should happen in your docker container.
 
 Clone this repository into your colcon workspace:
 
@@ -67,6 +69,8 @@ However, feel free to add more Python files to keep your code organized.
 
 ### 1. Running the Simulator
 
+All instructions detailed here should happen in your docker container.
+
 First, open [`rviz2`](https://docs.ros.org/en/humble/p/rviz2/) using the right-click menu in the NoVNC browser graphical interface (which can be accessed at http://localhost:6080/vnc.html?resize=remote after the docker container is started). 
 
 Launch the [racecar simulator](https://github.com/mit-racecar/racecar_simulator) by running (from any directory):
@@ -89,6 +93,8 @@ You're welcome to use either environment to test your wall follower, but be sure
 
 ### 2. Running your Wall Follower
 
+While running your simulator, open up another terminal and run:
+
     ros2 launch wall_follower wall_follower.launch.xml
 
 ***Note that you can modify and rerun your wall follower without needing to restart the simulator. Run the simulator once... and leave it running.***
@@ -103,7 +109,7 @@ First, launch the test simulator:
 
     ros2 launch wall_follower launch_test_sim.launch.py
 
-Then, launch the tests (which will automatically launch your wall follower as well):
+Then, in a separate terminal, launch the tests (which will automatically launch your wall follower as well):
 
     ros2 launch wall_follower launch_test.launch.py
 
@@ -121,7 +127,7 @@ If you're curious, the tester code is in `/wall_follower_sim/wall_follower/test_
 
 ## Lab Overview
 
-All instructions detailed here should happen in your docker container.
+All instructions detailed here should happen in your docker container. All of the work that you will do in this lab will be by modifying the wall_follower.py file.
 
 ### 1. Send Drive Commands
 
@@ -160,7 +166,7 @@ Not only is this param file useful for efficiently testing different configurati
 <br />
 
 ## Steps to Success
-How you implement the wall follower is entirely up to you. However, these are some key tips we compiled that will set you in the right direction:
+How you implement the wall follower is entirely up to you. However, the basic idea is that you will subscribe to lidar data, compute an estimate of where the wall is relative to the car, compute a control command from that estimated location, and then publish the control command to move the car. However, these are some key tips we compiled that will set you in the right direction:
 
 * __One step at a time__: Begin by setting up your wall follower node so that it subscribes to laser messages and publishes steering commands. Make sure you can move the racecar at a constant speed and turning angle before working on your controller.
 * __Slice up the scan__: Only a subset of the laserscan points will be useful to you -- how you filter these points will ***significantly*** impact your wall follower's performance. Think carefully about which laserscan points matter -- should you threshold by angle? by distance? by x- and y- coordinate (relative to the `base_link` frame)? Seriously, draw it out (based on the test cases) and think it through. When filtering the laserscan points, Try to use [```numpy```](https://numpy.org/) operations rather than for loops in your code. [Multidimensional slicing](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.indexing.html) and [broadcasting](https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html) can make your code cleaner and much more efficient.
